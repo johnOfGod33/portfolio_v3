@@ -19,6 +19,8 @@ const MAX_HINTS = 3;
 /** Trois vies pour toute la partie : chaque mauvais coup, sur n'importe quel problème, en coûte une. */
 const MAX_LIVES = 3;
 const SOLUTION_STEP_DELAY = 750;
+/** Après une victoire : temps de lire le motif avant de passer seul au problème suivant. */
+const AUTO_NEXT_DELAY = 1200;
 
 const toXY = (sq: string) => [FILES.indexOf(sq[0]), Number(sq[1]) - 1];
 const toSq = (x: number, y: number) =>
@@ -256,9 +258,14 @@ export function ChessPuzzle({ t }: ChessPuzzleProps) {
     if (afterWhite >= puzzle.line.length) {
       setStep(afterWhite);
       setStatus("solved");
-      const completesAll = !solved.has(index) && solved.size + 1 === puzzles.length;
+      const nowSolved = new Set(solved).add(index);
+      const completesAll = !solved.has(index) && nowSolved.size === puzzles.length;
       sound(completesAll ? "allSolved" : "win", 180);
-      setSolved((prev) => new Set(prev).add(index));
+      setSolved(nowSolved);
+      // Enchaîne tout seul sur le prochain problème non résolu (moins de friction).
+      const upcoming = puzzles.findIndex((_, i) => i > index && !nowSolved.has(i));
+      const target = upcoming !== -1 ? upcoming : puzzles.findIndex((_, i) => !nowSolved.has(i));
+      if (target !== -1) timer.current = setTimeout(() => goTo(target), AUTO_NEXT_DELAY);
       return;
     }
 
@@ -274,11 +281,6 @@ export function ChessPuzzle({ t }: ChessPuzzleProps) {
       setStep(afterWhite + 1);
     }, BLACK_REPLY_DELAY);
   }
-
-  const nextPuzzle = (() => {
-    const after = puzzles.findIndex((_, i) => i > index && !solved.has(i));
-    return after !== -1 ? after : puzzles.findIndex((_, i) => !solved.has(i));
-  })();
 
   const ranks = [7, 6, 5, 4, 3, 2, 1, 0];
 
@@ -485,27 +487,39 @@ export function ChessPuzzle({ t }: ChessPuzzleProps) {
                 {t.itWas} {t.patterns[puzzle.pattern]}
               </p>
               {allSolved ? (
-                <p className="mt-3">
-                  {t.allSolved}{" "}
-                  <a href="#contact" className="text-link text-foreground">
-                    {t.writeMe}
-                  </a>
-                  .
-                </p>
+                <>
+                  <p className="mt-3">
+                    {t.allSolved}{" "}
+                    <a href="#contact" className="text-link text-foreground">
+                      {t.writeMe}
+                    </a>
+                    .
+                  </p>
+                  <button
+                    type="button"
+                    onClick={newGame}
+                    className="group mt-2 inline-flex min-h-11 items-center gap-1.5 font-medium text-foreground transition-colors duration-150 hover:text-primary"
+                  >
+                    {t.retry}
+                    <ArrowRight
+                      size={15}
+                      strokeWidth={2}
+                      aria-hidden="true"
+                      className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+                    />
+                  </button>
+                </>
               ) : (
-                <button
-                  type="button"
-                  onClick={() => goTo(nextPuzzle)}
-                  className="group mt-3 inline-flex min-h-11 items-center gap-2 font-medium text-foreground transition-colors duration-150 hover:text-primary"
-                >
-                  {t.next}
-                  <ArrowRight
-                    size={16}
-                    strokeWidth={2}
-                    aria-hidden="true"
-                    className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                  />
-                </button>
+                <div className="mt-3">
+                  <p className="mono text-[13px] text-faint">{t.nextSoon}</p>
+                  {/* Barre qui se remplit pendant le délai avant le problème suivant. */}
+                  <div className="mt-2 h-px w-full max-w-40 overflow-hidden bg-border">
+                    <div
+                      className="auto-next h-full bg-primary"
+                      style={{ animationDuration: `${AUTO_NEXT_DELAY}ms` }}
+                    />
+                  </div>
+                </div>
               )}
             </>
           ) : gameOver ? (
@@ -597,7 +611,7 @@ export function ChessPuzzle({ t }: ChessPuzzleProps) {
             </button>
           )}
 
-          {(status === "good" || status === "wrong" || status === "solved") && (
+          {(status === "good" || status === "wrong") && (
             <button
               type="button"
               onClick={() => goTo(index)}

@@ -410,6 +410,19 @@ body {
   animation-delay: -600ms;
 }
 
+/* Échecs : barre de progression avant le passage automatique au problème suivant. */
+@keyframes auto-next {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.auto-next {
+  animation: auto-next linear both;
+}
+
 /* Échiquier vert de club : un objet, mêmes couleurs dans les deux thèmes. */
 .board {
   --sq-light: oklch(0.93 0.03 140);
