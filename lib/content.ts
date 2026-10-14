@@ -141,12 +141,12 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     start: "2025-02",
-    title: { fr: "Ingénieur backend junior", en: "Junior Backend Engineer" },
+    title: { fr: "Ingénieur backend", en: "Backend Engineer" },
     company: { fr: "EdoMatch", en: "EdoMatch" },
     url: "https://www.edomatch.com",
     summary: {
-      fr: "Je travaille sur le backend d’une plateforme de recrutement qui compte **plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises**. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité **plus de 3 000 candidatures**, et une génération d’offres d’emploi **adoptée par 3 000 entreprises**. Côté données, je conçois et sécurise la base MongoDB : les chargements sont **40 % plus rapides** et l’API répond **25 % plus vite** grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
-      en: "I work on the backend of a recruiting platform with **over 50,000 profiles, 6,500 active job listings and 3,000 companies**. I built its AI features: the FastAPI services that read and structure CVs for the OpenAI-embeddings recommendation engine, an n8n pipeline that has processed **over 3,000 applications**, and job-posting generation **adopted by 3,000 companies**. On the data side, I design and secure the MongoDB database: pages load **40% faster** and the API responds **25% faster** thanks to a CI/CD pipeline on AWS. And when an incident hits production, I’m the one debugging it.",
+      fr: "Je conçois, développe et maintiens les APIs qui font tourner la plateforme de recrutement d’EdoMatch et ses **50 000+ profils**, de l’idée jusqu’à la production. Je travaille avec les développeurs frontend et l’équipe produit, relis le code de l’équipe et veille à ce que les services tiennent la charge et restent rapides.",
+      en: "Design, build and maintain the APIs behind EdoMatch’s recruiting platform and its **50,000+ profiles**, from first sketch to production. Work closely with frontend developers and the product team, review teammates’ code, and make sure services hold the load and stay fast.",
     },
     stack: ["Python", "FastAPI", "MongoDB", "OpenAI", "n8n", "AWS"],
   },
@@ -156,8 +156,8 @@ export const experiences: Experience[] = [
     title: { fr: "Développeur frontend", en: "Frontend Developer" },
     company: { fr: "Projet Business Manager", en: "Business Manager project" },
     summary: {
-      fr: "Une application de gestion de stock en React, avec suivi des produits et reporting en temps réel via l’API. Je travaillais main dans la main avec le développeur backend et le chef de projet pour que l’ensemble reste cohérent.",
-      en: "A stock management app in React, with product tracking and real-time reporting through the API. I worked closely with the backend developer and the project manager to keep the whole thing consistent.",
+      fr: "J’ai développé le frontend d’une application de gestion de stock en React, du suivi des produits au reporting en temps réel via l’API. J’ai travaillé avec le développeur backend et le chef de projet pour que l’interface et l’API restent cohérentes.",
+      en: "Built the frontend of a stock management app in React, from product tracking to real-time reporting through the API. Worked closely with the backend developer and the project manager to keep the interface and the API consistent.",
     },
     stack: ["React"],
   },
