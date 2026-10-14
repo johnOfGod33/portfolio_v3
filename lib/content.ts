@@ -5,6 +5,8 @@ export const profile = {
   shortName: "Jean de Dieu",
   role: "Ingénieur backend",
   location: "Lomé, Togo",
+  /** Disponibilité affichée sous le rôle. */
+  availability: "Ouvert au remote",
   timeZone: "Africa/Lome",
   email: "sessoujeandedieu@gmail.com",
   pitch:
@@ -27,7 +29,17 @@ export const socials = [
   { label: "Articles", href: "#" },
 ];
 
-export const stack = ["FastAPI", "Python", "Node.js", "PostgreSQL", "Docker"];
+export const stack = [
+  "Python",
+  "FastAPI",
+  "Node.js",
+  "MongoDB",
+  "SQL",
+  "Redis",
+  "Docker",
+  "AWS",
+  "n8n",
+];
 
 export type Project = {
   name: string;
@@ -98,12 +110,15 @@ export const projects: Project[] = [
 ];
 
 export type Experience = {
-  period: string;
+  /** Début au format AAAA-MM. */
+  start: string;
+  /** Fin au format AAAA-MM ; absent pour un poste en cours. */
+  end?: string;
   title: string;
   company: string;
   /** Site de l’entreprise. */
   url?: string;
-  /** Résumé de ce qui a été accompli, en une ou deux phrases. */
+  /** Résumé de ce qui a été accompli. Les passages entre **…** sont mis en avant. */
   summary: string;
   stack: string[];
 };
@@ -111,16 +126,17 @@ export type Experience = {
 // Source : profil LinkedIn (Profile.pdf).
 export const experiences: Experience[] = [
   {
-    period: "févr. 2025 — aujourd’hui",
-    title: "Backend Engineer junior",
+    start: "2025-02",
+    title: "Ingénieur backend junior",
     company: "EdoMatch",
     url: "https://www.edomatch.com",
     summary:
-      "Je travaille sur le backend d’une plateforme de recrutement qui compte plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité plus de 3 000 candidatures, et une génération d’offres d’emploi adoptée par 3 000 entreprises. Côté données, je conçois et sécurise la base MongoDB : les chargements sont 40 % plus rapides et l’API répond 25 % plus vite grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
+      "Je travaille sur le backend d’une plateforme de recrutement qui compte **plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises**. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité **plus de 3 000 candidatures**, et une génération d’offres d’emploi **adoptée par 3 000 entreprises**. Côté données, je conçois et sécurise la base MongoDB : les chargements sont **40 % plus rapides** et l’API répond **25 % plus vite** grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
     stack: ["Python", "FastAPI", "MongoDB", "OpenAI", "n8n", "AWS"],
   },
   {
-    period: "juil. 2024 — sept. 2024",
+    start: "2024-07",
+    end: "2024-09",
     title: "Développeur frontend",
     company: "Projet Business Manager",
     summary:

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Pause, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -38,12 +38,13 @@ type VinylPlayerProps = {
 
 /**
  * Le portrait sert d'étiquette à un vinyle : un clic lance la playlist,
- * le disque tourne pendant la lecture. Le lecteur Spotify reste caché.
+ * le disque tourne et un égaliseur remplace le bouton play pendant la lecture.
+ * Mini-lecteur flottant sur mobile, intégré à la colonne fixe sur ordinateur.
+ * Le lecteur Spotify reste caché.
  */
 export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<SpotifyController | null>(null);
-  const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [playing, setPlaying] = useState(false);
 
@@ -58,7 +59,6 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
         { uri: `spotify:playlist:${playlistId}`, width: "100%", height: 80 },
         (controller) => {
           controllerRef.current = controller;
-          controller.addListener("ready", () => setReady(true));
           // Le premier événement annonce isPaused: false avant toute lecture ;
           // on attend que la position avance pour considérer le disque en lecture.
           controller.addListener("playback_update", (e) => {
@@ -92,79 +92,65 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
     controllerRef.current.togglePlay();
   }
 
-  const label = playing ? "Mettre en pause" : "Écouter ma playlist";
+  const label = playing
+    ? "Mettre en pause ma playlist"
+    : "Écouter ce que j’écoute en codant";
 
   return (
-    <div>
-      <div className="flex items-center gap-5">
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={label}
-          aria-pressed={playing}
-          className="group relative size-20 shrink-0 rounded-full transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.97]"
+    // Mini-lecteur : pastille flottante en bas à gauche sur mobile,
+    // intégré au bas de la colonne fixe sur ordinateur (lg).
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-3 rounded-full border border-border bg-background/85 p-1.5 shadow-[0_8px_24px_oklch(0.2_0.02_155/0.18)] backdrop-blur-md lg:static lg:z-auto lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none">
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={label}
+        aria-pressed={playing}
+        title={playing ? "En écoute. Clique pour mettre en pause." : "Ce que j’écoute en codant. Clique pour écouter."}
+        className="group relative block size-12 shrink-0 rounded-full transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.97] lg:size-14"
+      >
+        <span
+          className="vinyl absolute inset-0 rounded-full ring-1 ring-border shadow-[0_6px_18px_oklch(0.2_0.02_155/0.25)]"
+          data-playing={playing}
         >
-          <span
-            className="vinyl absolute inset-0 rounded-full ring-1 ring-border shadow-[0_6px_18px_oklch(0.2_0.02_155/0.25)]"
-            data-playing={playing}
-          >
-            <span className="absolute inset-[15%] overflow-hidden rounded-full ring-1 ring-black/40">
-              <Image
-                src="/portrait.jpg"
-                alt=""
-                fill
-                sizes="64px"
-                className="object-cover object-top"
-                priority
-              />
+          <span className="absolute inset-[15%] overflow-hidden rounded-full ring-1 ring-black/40">
+            <Image
+              src="/avatar.webp"
+              alt=""
+              fill
+              sizes="56px"
+              className="scale-[1.35] object-cover object-[50%_55%]"
+              priority
+            />
+          </span>
+          <span className="absolute left-1/2 top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-background" />
+        </span>
+        <span className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-background shadow-[0_2px_6px_oklch(0.2_0.02_155/0.3)] transition-transform duration-200 group-hover:scale-110 lg:size-6">
+          {playing ? (
+            <span className="eq flex h-2.5 items-end gap-0.5" aria-hidden="true">
+              <span className="h-full w-0.5 rounded-full bg-current" />
+              <span className="h-full w-0.5 rounded-full bg-current" />
+              <span className="h-full w-0.5 rounded-full bg-current" />
             </span>
-            <span className="absolute left-1/2 top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-background" />
-          </span>
-          <span className="absolute -bottom-1 -right-1 flex size-7 items-center justify-center rounded-full bg-primary text-background shadow-[0_2px_6px_oklch(0.2_0.02_155/0.3)] transition-transform duration-200 group-hover:scale-110">
-            {playing ? (
-              <Pause size={12} strokeWidth={2.5} fill="currentColor" />
-            ) : (
-              <Play
-                size={12}
-                strokeWidth={2.5}
-                fill="currentColor"
-                className="translate-x-px"
-              />
-            )}
-          </span>
-        </button>
+          ) : (
+            <Play
+              size={10}
+              strokeWidth={2.5}
+              fill="currentColor"
+              className="translate-x-px"
+            />
+          )}
+        </span>
+      </button>
 
-        <div className="text-sm leading-6">
-          <p className="flex items-center gap-2 font-medium text-foreground">
-            {playing ? "En écoute" : "Ce que j’écoute en codant"}
-            {playing && (
-              <span className="eq flex h-3 items-end gap-0.5" aria-hidden="true">
-                <span className="h-full w-0.5 rounded-full bg-primary" />
-                <span className="h-full w-0.5 rounded-full bg-primary" />
-                <span className="h-full w-0.5 rounded-full bg-primary" />
-              </span>
-            )}
-          </p>
-          <p className="text-faint">
-            {failed
-              ? "Lecteur indisponible"
-              : playing
-                ? "Clique pour mettre en pause"
-                : ready
-                  ? "Clique sur le disque"
-                  : "Chargement du disque…"}
-          </p>
-          <a
-            href={playlistUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mono inline-flex items-center gap-1 text-[12px] text-faint transition-colors duration-150 hover:text-primary"
-          >
-            Ouvrir dans Spotify
-            <ArrowUpRight size={12} strokeWidth={2} aria-hidden="true" />
-          </a>
-        </div>
-      </div>
+      {/* Légende : toujours visible sur ordinateur ; sur mobile, seulement pendant la lecture. */}
+      <p
+        aria-hidden="true"
+        className={`text-sm font-medium leading-5 text-foreground lg:block ${
+          playing ? "pr-3" : "hidden"
+        }`}
+      >
+        {playing ? "En écoute" : "Ce que j’écoute en codant"}
+      </p>
 
       {/* Le lecteur Spotify reste chargé, à sa vraie taille mais transparent :
           Spotify refuse de jouer dans un cadre de hauteur nulle. Le vinyle le pilote. */}

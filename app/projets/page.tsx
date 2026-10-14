@@ -5,9 +5,22 @@ import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { profile, projects } from "@/lib/content";
 
+const description =
+  "Les projets de Jean de Dieu Sessou, ingénieur backend : Kizo, APIs REST, outils en ligne de commande et applications web.";
+
 export const metadata: Metadata = {
-  title: "Projets — Jean de Dieu",
-  description: "Tous les projets de Jean de Dieu Sessou, ingénieur backend.",
+  title: "Projets",
+  description,
+  alternates: { canonical: "/projets" },
+  // Un bloc openGraph remplace entièrement celui du layout : on le redonne en entier.
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: profile.name,
+    url: "/projets",
+    title: `Projets — ${profile.name}`,
+    description,
+  },
 };
 
 export default function ProjectsPage() {
