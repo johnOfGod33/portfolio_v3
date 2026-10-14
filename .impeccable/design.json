@@ -8,81 +8,264 @@
         "role": "primary",
         "displayName": "Vert Lomé",
         "canonical": "oklch(0.5 0.12 155)",
-        "tonalRamp": ["oklch(0.2 0.06 155)", "oklch(0.3 0.08 155)", "oklch(0.4 0.1 155)", "oklch(0.5 0.12 155)", "oklch(0.6 0.13 155)", "oklch(0.7 0.13 155)", "oklch(0.8 0.11 155)", "oklch(0.92 0.06 155)"]
+        "tonalRamp": [
+          "oklch(0.2 0.06 155)",
+          "oklch(0.3 0.08 155)",
+          "oklch(0.4 0.1 155)",
+          "oklch(0.5 0.12 155)",
+          "oklch(0.6 0.13 155)",
+          "oklch(0.7 0.13 155)",
+          "oklch(0.8 0.11 155)",
+          "oklch(0.92 0.06 155)"
+        ]
       },
       "primary-dark": {
         "role": "primary",
         "displayName": "Vert Lomé (thème sombre)",
         "canonical": "oklch(0.77 0.13 155)",
-        "tonalRamp": ["oklch(0.2 0.06 155)", "oklch(0.3 0.08 155)", "oklch(0.4 0.1 155)", "oklch(0.5 0.12 155)", "oklch(0.6 0.13 155)", "oklch(0.77 0.13 155)", "oklch(0.85 0.1 155)", "oklch(0.92 0.06 155)"]
+        "tonalRamp": [
+          "oklch(0.2 0.06 155)",
+          "oklch(0.3 0.08 155)",
+          "oklch(0.4 0.1 155)",
+          "oklch(0.5 0.12 155)",
+          "oklch(0.6 0.13 155)",
+          "oklch(0.77 0.13 155)",
+          "oklch(0.85 0.1 155)",
+          "oklch(0.92 0.06 155)"
+        ]
       },
       "background": {
         "role": "neutral",
         "displayName": "Papier",
         "canonical": "oklch(0.99 0.002 155)",
-        "tonalRamp": ["oklch(0.17 0.006 155)", "oklch(0.21 0.01 155)", "oklch(0.28 0.008 155)", "oklch(0.47 0.012 155)", "oklch(0.53 0.01 155)", "oklch(0.72 0.01 155)", "oklch(0.91 0.006 155)", "oklch(0.99 0.002 155)"]
+        "tonalRamp": [
+          "oklch(0.17 0.006 155)",
+          "oklch(0.21 0.01 155)",
+          "oklch(0.28 0.008 155)",
+          "oklch(0.47 0.012 155)",
+          "oklch(0.53 0.01 155)",
+          "oklch(0.72 0.01 155)",
+          "oklch(0.91 0.006 155)",
+          "oklch(0.99 0.002 155)"
+        ]
       },
       "background-dark": {
         "role": "neutral",
         "displayName": "Papier (thème sombre)",
         "canonical": "oklch(0.17 0.006 155)",
-        "tonalRamp": ["oklch(0.17 0.006 155)", "oklch(0.21 0.008 155)", "oklch(0.28 0.008 155)", "oklch(0.45 0.014 155)", "oklch(0.64 0.01 155)", "oklch(0.72 0.01 155)", "oklch(0.86 0.006 155)", "oklch(0.94 0.004 155)"]
+        "tonalRamp": [
+          "oklch(0.17 0.006 155)",
+          "oklch(0.21 0.008 155)",
+          "oklch(0.28 0.008 155)",
+          "oklch(0.45 0.014 155)",
+          "oklch(0.64 0.01 155)",
+          "oklch(0.72 0.01 155)",
+          "oklch(0.86 0.006 155)",
+          "oklch(0.94 0.004 155)"
+        ]
       },
-      "foreground": { "role": "neutral", "displayName": "Encre", "canonical": "oklch(0.21 0.01 155)" },
-      "muted-foreground": { "role": "neutral", "displayName": "Encre douce", "canonical": "oklch(0.47 0.012 155)" },
-      "faint": { "role": "neutral", "displayName": "Discret", "canonical": "oklch(0.53 0.01 155)" },
-      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "oklch(0.965 0.006 155)" },
-      "border": { "role": "neutral", "displayName": "Trait", "canonical": "oklch(0.91 0.006 155)" },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Encre",
+        "canonical": "oklch(0.21 0.01 155)"
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Encre douce",
+        "canonical": "oklch(0.47 0.012 155)"
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Discret",
+        "canonical": "oklch(0.53 0.01 155)"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "oklch(0.965 0.006 155)"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Trait",
+        "canonical": "oklch(0.91 0.006 155)"
+      },
       "cover-pale": {
         "role": "secondary",
         "displayName": "Couverture pâle",
         "canonical": "oklch(0.9 0.06 155)",
-        "tonalRamp": ["oklch(0.25 0.04 155)", "oklch(0.3 0.08 155)", "oklch(0.32 0.06 155)", "oklch(0.5 0.12 155)", "oklch(0.86 0.1 155)", "oklch(0.88 0.05 155)", "oklch(0.9 0.06 155)", "oklch(0.97 0.02 155)"]
+        "tonalRamp": [
+          "oklch(0.25 0.04 155)",
+          "oklch(0.3 0.08 155)",
+          "oklch(0.32 0.06 155)",
+          "oklch(0.5 0.12 155)",
+          "oklch(0.86 0.1 155)",
+          "oklch(0.88 0.05 155)",
+          "oklch(0.9 0.06 155)",
+          "oklch(0.97 0.02 155)"
+        ]
       },
-      "cover-deep": { "role": "secondary", "displayName": "Couverture profonde", "canonical": "oklch(0.26 0.03 155)" },
-      "cover-accent": { "role": "secondary", "displayName": "Couverture accent", "canonical": "oklch(0.5 0.12 155)" },
+      "cover-deep": {
+        "role": "secondary",
+        "displayName": "Couverture profonde",
+        "canonical": "oklch(0.26 0.03 155)"
+      },
+      "cover-accent": {
+        "role": "secondary",
+        "displayName": "Couverture accent",
+        "canonical": "oklch(0.5 0.12 155)"
+      },
       "board-light": {
         "role": "tertiary",
         "displayName": "Case claire de club",
         "canonical": "oklch(0.93 0.03 140)",
-        "tonalRamp": ["oklch(0.25 0.04 155)", "oklch(0.45 0.07 150)", "oklch(0.6 0.075 150)", "oklch(0.7 0.06 145)", "oklch(0.8 0.045 142)", "oklch(0.88 0.035 140)", "oklch(0.93 0.03 140)", "oklch(0.97 0.015 140)"]
+        "tonalRamp": [
+          "oklch(0.25 0.04 155)",
+          "oklch(0.45 0.07 150)",
+          "oklch(0.6 0.075 150)",
+          "oklch(0.7 0.06 145)",
+          "oklch(0.8 0.045 142)",
+          "oklch(0.88 0.035 140)",
+          "oklch(0.93 0.03 140)",
+          "oklch(0.97 0.015 140)"
+        ]
       },
-      "board-dark": { "role": "tertiary", "displayName": "Case foncée de club", "canonical": "oklch(0.6 0.075 150)" },
-      "board-selected": { "role": "tertiary", "displayName": "Case sélectionnée", "canonical": "oklch(0.85 0.15 100 / 0.55)" },
-      "board-mated": { "role": "tertiary", "displayName": "Roi maté", "canonical": "oklch(0.62 0.2 28 / 0.55)" },
-      "vinyl-groove": { "role": "neutral", "displayName": "Sillon", "canonical": "oklch(0.16 0 0)" }
+      "board-dark": {
+        "role": "tertiary",
+        "displayName": "Case foncée de club",
+        "canonical": "oklch(0.6 0.075 150)"
+      },
+      "board-selected": {
+        "role": "tertiary",
+        "displayName": "Case sélectionnée",
+        "canonical": "oklch(0.85 0.15 100 / 0.55)"
+      },
+      "board-mated": {
+        "role": "tertiary",
+        "displayName": "Roi maté",
+        "canonical": "oklch(0.62 0.2 28 / 0.55)"
+      },
+      "vinyl-groove": {
+        "role": "neutral",
+        "displayName": "Sillon",
+        "canonical": "oklch(0.16 0 0)"
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display (Big Shoulders)", "purpose": "Le nom dans la colonne gauche, lettres posées une à une." },
-      "headline": { "displayName": "Headline (Big Shoulders)", "purpose": "Titres de section ; collants sur mobile. Doit partager graisse et tracking avec le nom." },
-      "headline-contact": { "displayName": "Headline contact", "purpose": "La phrase d'appel de la section Contact." },
-      "cover-title": { "displayName": "Cover title", "purpose": "Nom de projet sur une couverture typographique." },
-      "title": { "displayName": "Title (Bricolage)", "purpose": "Rôle, intitulés d'expérience, noms de projets sous leur couverture." },
-      "body": { "displayName": "Body (Bricolage)", "purpose": "Texte d'À propos." },
-      "body-small": { "displayName": "Body small", "purpose": "Descriptions d'expérience et de projet, texte de l'échiquier." },
-      "label": { "displayName": "Label (Geist Mono)", "purpose": "Données uniquement : dates, stack, heure, coordonnées, pied de page." }
+      "display": {
+        "displayName": "Display (Big Shoulders)",
+        "purpose": "Le nom dans la colonne gauche, lettres posées une à une."
+      },
+      "headline": {
+        "displayName": "Headline (Big Shoulders)",
+        "purpose": "Titres de section ; collants sur mobile. Doit partager graisse et tracking avec le nom."
+      },
+      "headline-contact": {
+        "displayName": "Headline contact",
+        "purpose": "La phrase d'appel de la section Contact."
+      },
+      "cover-title": {
+        "displayName": "Cover title",
+        "purpose": "Nom de projet sur une couverture typographique."
+      },
+      "title": {
+        "displayName": "Title (Bricolage)",
+        "purpose": "Rôle, intitulés d'expérience, noms de projets sous leur couverture."
+      },
+      "body": {
+        "displayName": "Body (Bricolage)",
+        "purpose": "Texte d'À propos."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Descriptions d'expérience et de projet, texte de l'échiquier."
+      },
+      "label": {
+        "displayName": "Label (Geist Mono)",
+        "purpose": "Données uniquement : dates, stack, heure, coordonnées, pied de page."
+      }
     },
     "shadows": [
-      { "name": "disque", "value": "0 6px 18px oklch(0.2 0.02 155 / 0.25)", "purpose": "Le vinyle." },
-      { "name": "pastille", "value": "0 2px 6px oklch(0.2 0.02 155 / 0.3)", "purpose": "Pastille play/pause sur le disque." },
-      { "name": "plateau", "value": "0 10px 30px oklch(0.25 0.04 155 / 0.18)", "purpose": "L'échiquier." },
-      { "name": "piece", "value": "drop-shadow(0 1px 1px oklch(0.2 0.02 155 / 0.35))", "purpose": "Chaque pièce d'échecs (filter)." },
-      { "name": "flottant", "value": "0 4px 14px oklch(0.2 0.02 155 / 0.12)", "purpose": "Bouton de thème, seul contrôle fixe au-dessus du contenu." }
+      {
+        "name": "disque",
+        "value": "0 6px 18px oklch(0.2 0.02 155 / 0.25)",
+        "purpose": "Le vinyle."
+      },
+      {
+        "name": "pastille",
+        "value": "0 2px 6px oklch(0.2 0.02 155 / 0.3)",
+        "purpose": "Pastille play/pause sur le disque."
+      },
+      {
+        "name": "plateau",
+        "value": "0 10px 30px oklch(0.25 0.04 155 / 0.18)",
+        "purpose": "L'échiquier."
+      },
+      {
+        "name": "piece",
+        "value": "drop-shadow(0 1px 1px oklch(0.2 0.02 155 / 0.35))",
+        "purpose": "Chaque pièce d'échecs (filter)."
+      },
+      {
+        "name": "flottant",
+        "value": "0 4px 14px oklch(0.2 0.02 155 / 0.12)",
+        "purpose": "Bouton de thème, seul contrôle fixe au-dessus du contenu."
+      }
     ],
     "motion": [
-      { "name": "ease-settle", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Arrivées, lettres du nom, glissement des pièces." },
-      { "name": "settle", "value": "700ms, décalage 70ms × --i, flou 6px → net, montée 6px", "purpose": "Blocs de la colonne gauche au chargement." },
-      { "name": "letter", "value": "650ms, 120ms + 35ms × --l, flou 4px, montée 0.35em", "purpose": "Lettres du nom." },
-      { "name": "reveal", "value": "animation-timeline: view(); range entry 0% → 35%; montée 24px", "purpose": "Révélation au scroll, uniquement sous @supports." },
-      { "name": "spin-record", "value": "2.4s linear infinite, en pause hors lecture", "purpose": "Rotation du vinyle." },
-      { "name": "eq", "value": "900ms ease-in-out infinite, décalages -300/-600ms", "purpose": "Barres d'égaliseur." },
-      { "name": "state", "value": "150–200ms ease-out", "purpose": "Couleurs et montées de survol." },
-      { "name": "reduced-motion", "value": "@media (prefers-reduced-motion: reduce) → animation: none / transition: none", "purpose": "Coupe settle, lettres, révélation, disque, égaliseur, pièces." }
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Arrivées, lettres du nom, glissement des pièces."
+      },
+      {
+        "name": "settle",
+        "value": "700ms, décalage 70ms × --i, flou 6px → net, montée 6px",
+        "purpose": "Blocs de la colonne gauche au chargement."
+      },
+      {
+        "name": "letter",
+        "value": "650ms, 120ms + 35ms × --l, flou 4px, montée 0.35em",
+        "purpose": "Lettres du nom."
+      },
+      {
+        "name": "reveal",
+        "value": "animation-timeline: view(); range entry 0% → 35%; montée 24px",
+        "purpose": "Révélation au scroll, uniquement sous @supports."
+      },
+      {
+        "name": "spin-record",
+        "value": "2.4s linear infinite, en pause hors lecture",
+        "purpose": "Rotation du vinyle."
+      },
+      {
+        "name": "eq",
+        "value": "900ms ease-in-out infinite, décalages -300/-600ms",
+        "purpose": "Barres d'égaliseur."
+      },
+      {
+        "name": "state",
+        "value": "150–200ms ease-out",
+        "purpose": "Couleurs et montées de survol."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce) → animation: none / transition: none",
+        "purpose": "Coupe settle, lettres, révélation, disque, égaliseur, pièces."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
     ]
   },
   "components": [
@@ -119,12 +302,12 @@
       "css": ".ds-copy { font-family: var(--font-body, 'Bricolage Grotesque'), system-ui, sans-serif; font-size: 15px; line-height: 28px; color: var(--muted-foreground, oklch(0.47 0.012 155)); } .ds-text-link { color: var(--foreground, oklch(0.21 0.01 155)); text-decoration: underline; text-decoration-color: var(--border, oklch(0.91 0.006 155)); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease-out, text-decoration-color 150ms ease-out; } .ds-text-link:hover { color: var(--primary, oklch(0.5 0.12 155)); text-decoration-color: currentColor; } .ds-text-link:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; border-radius: 4px; }"
     },
     {
-      "name": "Bouton de thème",
-      "kind": "button",
-      "refersTo": "theme-toggle",
-      "description": "Bouton rond flottant en haut à droite, bascule clair/sombre, choix persistant.",
-      "html": "<button class=\"ds-theme-toggle\" aria-label=\"Passer en mode sombre\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg></button>",
-      "css": ".ds-theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid var(--border, oklch(0.91 0.006 155)); background: color-mix(in oklch, var(--background, oklch(0.99 0.002 155)) 85%, transparent); color: var(--foreground, oklch(0.21 0.01 155)); box-shadow: 0 4px 14px oklch(0.2 0.02 155 / 0.12); backdrop-filter: blur(12px); cursor: pointer; transition: color 200ms, transform 200ms, border-color 200ms; } .ds-theme-toggle svg { transition: transform 500ms ease-out; } .ds-theme-toggle:hover { transform: scale(1.05); border-color: var(--primary, oklch(0.5 0.12 155)); color: var(--primary, oklch(0.5 0.12 155)); } .ds-theme-toggle:hover svg { transform: rotate(20deg); } .ds-theme-toggle:active { transform: scale(0.95); } .ds-theme-toggle:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; }"
+      "name": "Dock",
+      "kind": "custom",
+      "refersTo": "dock",
+      "description": "Pastille fixée en bas au centre, identique sur ordinateur et mobile : mini-lecteur, sélecteur de langue FR / EN, bascule de thème.",
+      "html": "<div class=\"ds-dock\" role=\"toolbar\" aria-label=\"Musique, langue et thème\"><button class=\"ds-dock-disc\" aria-label=\"Écouter ce que j’écoute en codant\"></button><span class=\"ds-dock-divider\"></span><nav class=\"ds-dock-lang\" aria-label=\"Langue du site\"><a href=\"/fr\" aria-current=\"true\">fr</a><a href=\"/en\">en</a></nav><span class=\"ds-dock-divider\"></span><button class=\"ds-dock-theme\" aria-label=\"Passer en mode sombre\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg></button></div>",
+      "css": ".ds-dock { display: inline-flex; align-items: center; padding: 6px; border-radius: 9999px; border: 1px solid var(--border, oklch(0.91 0.006 155)); background: var(--background, oklch(0.99 0.002 155)); box-shadow: 0 8px 24px oklch(0.2 0.02 155 / 0.16); } .ds-dock-divider { width: 1px; height: 20px; margin: 0 4px; background: var(--border, oklch(0.91 0.006 155)); } .ds-dock-disc { width: 36px; height: 36px; border: none; border-radius: 9999px; background: radial-gradient(circle, oklch(0.6 0.02 155) 34%, oklch(0.16 0 0) 35%); box-shadow: 0 0 0 1px var(--border, oklch(0.91 0.006 155)); cursor: pointer; } .ds-dock-lang { display: flex; } .ds-dock-lang a { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 8px; border-radius: 9999px; font-family: var(--font-code, 'Geist Mono'), ui-monospace, monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; text-decoration: none; color: var(--muted-foreground, oklch(0.47 0.012 155)); } .ds-dock-lang a[aria-current] { background: var(--foreground, oklch(0.21 0.01 155)); color: var(--background, oklch(0.99 0.002 155)); } .ds-dock-theme { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: none; border-radius: 9999px; background: transparent; color: var(--muted-foreground, oklch(0.47 0.012 155)); cursor: pointer; transition: color 200ms, background-color 200ms, transform 200ms; } .ds-dock-theme:hover { background: var(--surface, oklch(0.965 0.006 155)); color: var(--primary, oklch(0.5 0.12 155)); } .ds-dock-theme:active { transform: scale(0.95); } .ds-dock a:focus-visible, .ds-dock button:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; }"
     },
     {
       "name": "Ligne d'expérience",
@@ -138,17 +321,17 @@
       "name": "Couverture typographique",
       "kind": "card",
       "refersTo": "project-cover",
-      "description": "Couverture par défaut d'un projet sans capture : nom en Big Shoulders sur un ton plat de la teinte.",
+      "description": "Couverture typographique posée sur la capture du projet : au repos l'image transparaît en niveaux de gris, au survol (ou au scroll sur écran tactile) la couverture s'efface et le titre passe en filigrane.",
       "html": "<a href=\"#\" class=\"ds-cover\"><span class=\"ds-cover-stack\">FastAPI · PostgreSQL · Docker</span><span class=\"ds-cover-title\">Nom du projet</span></a>",
-      "css": ".ds-cover { display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 3; max-width: 320px; padding: 20px; border-radius: 1.05rem; overflow: hidden; background: oklch(0.9 0.06 155); color: oklch(0.3 0.08 155); text-decoration: none; } .ds-cover-stack { font-family: var(--font-code, 'Geist Mono'), ui-monospace, monospace; font-size: 12px; opacity: 0.75; } .ds-cover-title { font-family: var(--font-display, 'Big Shoulders'), 'Arial Narrow', sans-serif; font-weight: 800; font-size: calc(clamp(2rem, 4vw, 2.75rem) * var(--heading-scale, 1.22)); line-height: 0.88; letter-spacing: -0.02em; transition: transform 700ms ease-out; } .ds-cover:hover .ds-cover-title { transform: translateY(-6px); } .ds-cover:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; }"
+      "css": ".ds-cover { display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 3; max-width: 320px; padding: 20px; border-radius: 1.05rem; overflow: hidden; background: oklch(0.9 0.06 155); color: oklch(0.3 0.08 155); text-decoration: none; } .ds-cover-stack { font-family: var(--font-code, 'Geist Mono'), ui-monospace, monospace; font-size: 12px; } .ds-cover-title { font-family: var(--font-display, 'Big Shoulders'), 'Arial Narrow', sans-serif; font-weight: 800; font-size: calc(clamp(2rem, 4vw, 2.75rem) * var(--heading-scale, 1.22)); line-height: 0.88; letter-spacing: -0.02em; transition: transform 700ms ease-out; } .ds-cover:hover .ds-cover-title { transform: translateY(-6px); } .ds-cover:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; }"
     },
     {
       "name": "Vinyle-lecteur",
       "kind": "custom",
       "refersTo": "vinyl-record",
-      "description": "Le portrait en étiquette d'un vinyle ; le disque tourne pendant la lecture de la playlist.",
-      "html": "<button class=\"ds-vinyl\" aria-label=\"Écouter ma playlist\"><span class=\"ds-vinyl-disc\"><span class=\"ds-vinyl-label\"></span><span class=\"ds-vinyl-hole\"></span></span><span class=\"ds-vinyl-badge\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M6 3l14 9-14 9z\"/></svg></span></button>",
-      "css": ".ds-vinyl { position: relative; width: 80px; height: 80px; padding: 0; border: none; border-radius: 9999px; background: none; cursor: pointer; transition: transform 300ms ease-out; } .ds-vinyl:hover { transform: scale(1.04); } .ds-vinyl:active { transform: scale(0.97); } .ds-vinyl:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; } .ds-vinyl-disc { position: absolute; inset: 0; border-radius: 9999px; background: radial-gradient(circle, transparent 36%, oklch(0.16 0 0) 37%), repeating-radial-gradient(circle, oklch(0.2 0 0) 0 1px, oklch(0.13 0 0) 1px 3px); box-shadow: 0 0 0 1px var(--border, oklch(0.91 0.006 155)), 0 6px 18px oklch(0.2 0.02 155 / 0.25); animation: ds-spin 2.4s linear infinite; animation-play-state: paused; } .ds-vinyl:hover .ds-vinyl-disc { animation-play-state: running; } .ds-vinyl-label { position: absolute; inset: 15%; border-radius: 9999px; background: oklch(0.6 0.04 60); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4); } .ds-vinyl-hole { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 9999px; background: var(--background, oklch(0.99 0.002 155)); } .ds-vinyl-badge { position: absolute; right: -4px; bottom: -4px; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: var(--primary, oklch(0.5 0.12 155)); color: var(--background, oklch(0.99 0.002 155)); box-shadow: 0 2px 6px oklch(0.2 0.02 155 / 0.3); transition: transform 200ms; } .ds-vinyl:hover .ds-vinyl-badge { transform: scale(1.1); } @keyframes ds-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .ds-vinyl-disc { animation: none; } }"
+      "description": "Disque de 36px dans le dock, avatar illustré en étiquette ; il tourne et la pastille affiche un égaliseur pendant la lecture, avec « En écoute » à côté.",
+      "html": "<button class=\"ds-vinyl\" aria-label=\"Écouter ma playlist\"><span class=\"ds-vinyl-disc\"><span class=\"ds-vinyl-label\"></span><span class=\"ds-vinyl-hole\"></span></span><span class=\"ds-vinyl-badge\"><svg width=\"8\" height=\"8\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M6 3l14 9-14 9z\"/></svg></span></button>",
+      "css": ".ds-vinyl { position: relative; width: 36px; height: 36px; padding: 0; border: none; border-radius: 9999px; background: none; cursor: pointer; transition: transform 300ms ease-out; } .ds-vinyl:hover { transform: scale(1.06); } .ds-vinyl:active { transform: scale(0.95); } .ds-vinyl:focus-visible { outline: 2px solid var(--primary, oklch(0.5 0.12 155)); outline-offset: 3px; } .ds-vinyl-disc { position: absolute; inset: 0; border-radius: 9999px; background: radial-gradient(circle, transparent 36%, oklch(0.16 0 0) 37%), repeating-radial-gradient(circle, oklch(0.2 0 0) 0 1px, oklch(0.13 0 0) 1px 3px); box-shadow: 0 0 0 1px var(--border, oklch(0.91 0.006 155)); animation: ds-spin 2.4s linear infinite; animation-play-state: paused; } .ds-vinyl:hover .ds-vinyl-disc { animation-play-state: running; } .ds-vinyl-label { position: absolute; inset: 15%; border-radius: 9999px; background: oklch(0.6 0.04 60); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4); } .ds-vinyl-hole { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 9999px; background: var(--background, oklch(0.99 0.002 155)); } .ds-vinyl-badge { position: absolute; right: -2px; bottom: -2px; display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 9999px; background: var(--primary, oklch(0.5 0.12 155)); color: var(--background, oklch(0.99 0.002 155)); box-shadow: 0 0 0 2px var(--background, oklch(0.99 0.002 155)); transition: transform 200ms; } .ds-vinyl:hover .ds-vinyl-badge { transform: scale(1.1); } @keyframes ds-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .ds-vinyl-disc { animation: none; } }"
     },
     {
       "name": "Échiquier de club",
@@ -161,26 +344,66 @@
   ],
   "narrative": {
     "northStar": "Une page, un disque, un échiquier",
-    "overview": "Pas de métaphore à décoder : une page claire, sobre, où la personnalité tient dans deux objets réels de la vie de Jean de Dieu. Sa playlist de code, qu'on lance en cliquant sur un vinyle dont son portrait est l'étiquette, et un problème d'échecs qu'on peut jouer. Tout le reste se tait : texte bien composé, une seule teinte vert profond (clin d'œil discret au Togo), des titres condensés à l'allure industrielle qui rappellent sa formation en génie mécanique.\n\nLa page est à deux colonnes sur desktop : à gauche, une colonne fixe qui dit qui il est et où l'on se trouve ; à droite, le contenu qui défile. Sur mobile tout s'empile et les titres de section prennent le relais de la navigation en restant collés en haut. Le clair est le mode par défaut, le sombre est son égal, pas un bonus : la préférence système décide d'abord, puis le visiteur peut basculer. Le mouvement existe pour que la page se pose et réponde, jamais pour faire spectacle.\n\nRejets confirmés : le template SaaS (cards partout, gradients, eyebrow + gros CTA), le portfolio Awwwards sur-animé, le CV corporate, le cliché « hacker » (noir + vert néon, faux terminal), et le joli-mais-froid. Le vert est profond et posé, jamais néon ; la mono est réservée aux données, jamais une identité « terminal ».",
+    "overview": "Pas de métaphore à décoder : une page claire, sobre, où la personnalité tient dans deux objets réels de la vie de Jean de Dieu. Sa playlist de code, qu'on lance en cliquant sur un vinyle dont son portrait est l'étiquette, et un problème d'échecs qu'on peut jouer. Tout le reste se tait : texte bien composé, une seule teinte vert profond (clin d'œil discret au Togo), des titres condensés à l'allure industrielle qui rappellent sa formation en génie mécanique.\n\nLa page est à deux colonnes sur desktop : à gauche, une colonne fixe qui dit qui il est et où l'on se trouve ; à droite, le contenu qui défile. Sur mobile tout s'empile et les titres de section prennent le relais de la navigation en restant collés en haut. Le clair est le mode par défaut, le sombre est son égal, pas un bonus : la préférence système décide d'abord, puis le visiteur peut basculer. Le site existe en français et en anglais, à égalité. Le mouvement existe pour que la page se pose et réponde, jamais pour faire spectacle.\n\nRejets confirmés : le template SaaS (cards partout, gradients, eyebrow + gros CTA), le portfolio Awwwards sur-animé, le CV corporate, le cliché « hacker » (noir + vert néon, faux terminal), et le joli-mais-froid. Le vert est profond et posé, jamais néon ; la mono est réservée aux données, jamais une identité « terminal ».",
     "keyCharacteristics": [
       "Une teinte (155°) pour tout le système, en clair comme en sombre ; l'accent est rare dans l'interface mais s'affirme à l'échelle du bloc sur les couvertures de projets.",
       "Trois voix typographiques aux rôles étanches : Big Shoulders pour les titres, Bricolage Grotesque pour le texte, Geist Mono pour les données.",
-      "Colonne gauche fixe (vinyle, nom, rôle, pitch, navigation scrollspy, réseaux + heure de Lomé), colonne droite qui défile, un bouton de thème rond flottant en haut à droite.",
-      "Deux objets signature : le vinyle-lecteur et l'échiquier jouable. Ce sont les seuls éléments qui ont des couleurs propres, et avec le bouton de thème flottant, les seuls à porter une ombre.",
+      "Colonne gauche fixe (nom, rôle, ligne de statut, pitch, bouton CV, navigation scrollspy, réseaux + heure de Lomé), colonne droite qui défile, et un dock flottant en bas au centre qui regroupe le mini-lecteur, le sélecteur de langue et la bascule de thème.",
+      "Deux objets signature : le vinyle-lecteur et l'échiquier jouable. Ce sont les seuls éléments qui ont des couleurs propres, et avec le dock, les seuls à porter une ombre.",
       "Pas de card au repos : une surface n'apparaît qu'au survol.",
       "Tout le mouvement se coupe sous `prefers-reduced-motion`."
     ],
     "rules": [
-      { "name": "The One Hue Rule", "body": "Toute couleur d'interface partage la teinte 155°. Les seules exceptions sont les objets : le plateau d'échecs (cases 140–150°, jaune de sélection, rouge de mat) et les sillons achromatiques du vinyle. Une nouvelle teinte dans l'interface demande une décision explicite.", "section": "colors" },
-      { "name": "The Block-Scale Accent Rule", "body": "Dans l'interface, l'accent reste rare (états et liens). Il ne s'engage en masse qu'à l'échelle d'un bloc entier, sur les couvertures de projets, et toujours en tons de la même teinte.", "section": "colors" },
-      { "name": "The Equal Themes Rule", "body": "Chaque token existe en clair et en sombre, réglé pour son fond. Le thème suit la préférence système jusqu'à ce que le visiteur choisisse avec le bouton de thème ; son choix (`localStorage` clé `theme`) est posé en `data-theme` sur `<html>` par un script inline avant le premier rendu. Les valeurs sombres s'appliquent sous `:root[data-theme=\"dark\"]` et sous `@media (prefers-color-scheme: dark)` pour `:root:not([data-theme=\"light\"])` ; toute règle dépendante du thème (tokens, tons de couverture) doit être écrite pour ces deux sélecteurs.", "section": "colors" },
-      { "name": "The Same Voice Rule", "body": "Tous les titres en Big Shoulders (nom, sections, contact, couvertures) partagent la même graisse (800) et la même famille de tracking que le nom. Un titre de section ne doit jamais paraître plus léger ou plus serré que le nom. Valeur unique : tracking -0.02em, graisse 800, y compris pour « Échec et mat. ».", "section": "typography" },
-      { "name": "The Data-Only Mono Rule", "body": "Geist Mono sert uniquement aux données (dates, stack, coordonnées, heure). Jamais pour un titre, un paragraphe ou un bouton de navigation.", "section": "typography" },
-      { "name": "The Heading Scale Rule", "body": "Toute taille de titre en police display s'écrit `calc(<taille> * var(--heading-scale))`. La variable (1.22 pour Big Shoulders, dans `app/globals.css`) compense la largeur de la police. Pour changer de police de titre : remplacer `fontDisplay` dans `lib/fonts.ts` par une déclaration de `lib/fonts-reserve.ts` (garder `variable: \"--font-display\"`), puis régler `--heading-scale` sur sa valeur : Unbounded 0.66, Funnel Display 0.82, Anybody 0.95, Bricolage Grotesque 1. Les polices de réserve ne sont pas importées, donc jamais chargées.", "section": "typography" },
-      { "name": "The Fixed Identity Rule", "body": "Sur desktop, l'identité (vinyle, nom, navigation, contact rapide) ne quitte jamais l'écran ; seul le contenu défile.", "section": "layout" },
-      { "name": "The Objects-Only Shadow Rule", "body": "Une ombre signale un objet physique (disque, plateau, pièce) ou un contrôle qui flotte réellement au-dessus du contenu (bouton de thème). Aucune ombre sur une section, une ligne, une couverture ou un lien.", "section": "elevation" },
-      { "name": "The Hover Surface Rule", "body": "Les surfaces n'existent pas au repos : une ligne d'expérience prend `surface` et un coin arrondi seulement au survol, sur desktop.", "section": "elevation" },
-      { "name": "The Vinyl Texture Exception", "body": "Les sillons du disque (`repeating-radial-gradient`) sont le seul dégradé du système : une texture de matière, pas une décoration. Aucun autre dégradé.", "section": "shapes" }
+      {
+        "name": "The One Hue Rule",
+        "body": "Toute couleur d'interface partage la teinte 155°. Les seules exceptions sont les objets : le plateau d'échecs (cases 140–150°, jaune de sélection, rouge de mat) et les sillons achromatiques du vinyle. Une nouvelle teinte dans l'interface demande une décision explicite.",
+        "section": "colors"
+      },
+      {
+        "name": "The Block-Scale Accent Rule",
+        "body": "Dans l'interface, l'accent reste rare (états et liens). Il ne s'engage en masse qu'à l'échelle d'un bloc entier, sur les couvertures de projets, et toujours en tons de la même teinte.",
+        "section": "colors"
+      },
+      {
+        "name": "The Equal Themes Rule",
+        "body": "Chaque token existe en clair et en sombre, réglé pour son fond. Le thème suit la préférence système jusqu'à ce que le visiteur choisisse avec le bouton de thème ; son choix (`localStorage` clé `theme`) est posé en `data-theme` sur `<html>` par un script inline avant le premier rendu. Les valeurs sombres s'appliquent sous `:root[data-theme=\"dark\"]` et sous `@media (prefers-color-scheme: dark)` pour `:root:not([data-theme=\"light\"])` ; toute règle dépendante du thème (tokens, tons de couverture) doit être écrite pour ces deux sélecteurs.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same Voice Rule",
+        "body": "Tous les titres en Big Shoulders (nom, sections, contact, couvertures) partagent la même graisse (800) et la même famille de tracking que le nom. Un titre de section ne doit jamais paraître plus léger ou plus serré que le nom. Valeur unique : tracking -0.02em, graisse 800, y compris pour « Échec et mat. ».",
+        "section": "typography"
+      },
+      {
+        "name": "The Data-Only Mono Rule",
+        "body": "Geist Mono sert uniquement aux données (dates, stack, coordonnées, heure). Jamais pour un titre, un paragraphe ou un bouton de navigation.",
+        "section": "typography"
+      },
+      {
+        "name": "The Heading Scale Rule",
+        "body": "Toute taille de titre en police display s'écrit `calc(<taille> * var(--heading-scale))`. La variable (1.22 pour Big Shoulders, dans `app/globals.css`) compense la largeur de la police. Pour changer de police de titre : remplacer `fontDisplay` dans `lib/fonts.ts` par une déclaration de `lib/fonts-reserve.ts` (garder `variable: \"--font-display\"`), puis régler `--heading-scale` sur sa valeur : Unbounded 0.66, Funnel Display 0.82, Anybody 0.95, Bricolage Grotesque 1. Les polices de réserve ne sont pas importées, donc jamais chargées.",
+        "section": "typography"
+      },
+      {
+        "name": "The Fixed Identity Rule",
+        "body": "Sur desktop, l'identité (vinyle, nom, navigation, contact rapide) ne quitte jamais l'écran ; seul le contenu défile.",
+        "section": "layout"
+      },
+      {
+        "name": "The Objects-Only Shadow Rule",
+        "body": "Une ombre signale un objet physique (disque, plateau, pièce) ou un contrôle qui flotte réellement au-dessus du contenu (bouton de thème). Aucune ombre sur une section, une ligne, une couverture ou un lien.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Hover Surface Rule",
+        "body": "Les surfaces n'existent pas au repos : une ligne d'expérience prend `surface` et un coin arrondi seulement au survol, sur desktop.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Vinyl Texture Exception",
+        "body": "Les sillons du disque (`repeating-radial-gradient`) sont le seul dégradé du système : une texture de matière, pas une décoration. Aucun autre dégradé.",
+        "section": "shapes"
+      }
     ],
     "dos": [
       "Do garder toute couleur d'interface à la teinte 155°, avec une valeur réglée pour chaque thème, écrite à la fois pour `[data-theme=\"dark\"]` et pour la préférence système.",

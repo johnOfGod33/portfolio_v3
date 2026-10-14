@@ -1,6 +1,6 @@
 ---
 name: Jean de Dieu — Portfolio
-description: Portfolio minimal d'un ingénieur backend de Lomé — clair par défaut, une seule teinte vert profond, titres condensés, une playlist et un échiquier pour la personnalité.
+description: Portfolio minimal et bilingue (FR / EN) d'un ingénieur backend de Lomé — clair par défaut, une seule teinte vert profond, titres condensés, une playlist et un échiquier pour la personnalité.
 colors:
   background: "oklch(0.99 0.002 155)"
   foreground: "oklch(0.21 0.01 155)"
@@ -118,22 +118,31 @@ components:
     textColor: "{colors.cover-pale-ink}"
     rounded: "{rounded.surface}"
     padding: "20px"
+  dock:
+    backgroundColor: "{colors.background}"
+    rounded: "{rounded.full}"
+    padding: "6px"
   vinyl-badge:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.background}"
     rounded: "{rounded.full}"
-    size: "28px"
-  theme-toggle:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
+    size: "16px"
+  language-switch-active:
+    backgroundColor: "{colors.foreground}"
+    textColor: "{colors.background}"
     rounded: "{rounded.full}"
-    size: "44px"
+    height: "36px"
+  theme-toggle:
+    textColor: "{colors.muted-foreground}"
+    rounded: "{rounded.full}"
+    size: "36px"
   theme-toggle-hover:
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.primary}"
   vinyl-record:
     backgroundColor: "{colors.vinyl-groove}"
     rounded: "{rounded.full}"
-    size: "80px"
+    size: "36px"
   chess-board:
     rounded: "{rounded.board}"
     width: "20rem"
@@ -147,15 +156,15 @@ components:
 
 Pas de métaphore à décoder : une page claire, sobre, où la personnalité tient dans deux objets réels de la vie de Jean de Dieu. Sa playlist de code, qu'on lance en cliquant sur un vinyle dont son portrait est l'étiquette, et un problème d'échecs qu'on peut jouer. Tout le reste se tait : texte bien composé, une seule teinte vert profond (clin d'œil discret au Togo), des titres condensés à l'allure industrielle qui rappellent sa formation en génie mécanique.
 
-La page est à deux colonnes sur desktop : à gauche, une colonne fixe qui dit qui il est et où l'on se trouve ; à droite, le contenu qui défile. Sur mobile tout s'empile et les titres de section prennent le relais de la navigation en restant collés en haut. Le clair est le mode par défaut, le sombre est son égal, pas un bonus : la préférence système décide d'abord, puis le visiteur peut basculer. Le mouvement existe pour que la page se pose et réponde, jamais pour faire spectacle.
+La page est à deux colonnes sur desktop : à gauche, une colonne fixe qui dit qui il est et où l'on se trouve ; à droite, le contenu qui défile. Sur mobile tout s'empile et les titres de section prennent le relais de la navigation en restant collés en haut. Le clair est le mode par défaut, le sombre est son égal, pas un bonus : la préférence système décide d'abord, puis le visiteur peut basculer. Le site existe en français et en anglais, à égalité. Le mouvement existe pour que la page se pose et réponde, jamais pour faire spectacle.
 
 Rejets confirmés : le template SaaS (cards partout, gradients, eyebrow + gros CTA), le portfolio Awwwards sur-animé, le CV corporate, le cliché « hacker » (noir + vert néon, faux terminal), et le joli-mais-froid. Le vert est profond et posé, jamais néon ; la mono est réservée aux données, jamais une identité « terminal ».
 
 **Key Characteristics:**
 - Une teinte (155°) pour tout le système, en clair comme en sombre ; l'accent est rare dans l'interface mais s'affirme à l'échelle du bloc sur les couvertures de projets.
 - Trois voix typographiques aux rôles étanches : Big Shoulders pour les titres, Bricolage Grotesque pour le texte, Geist Mono pour les données.
-- Colonne gauche fixe (vinyle, nom, rôle, pitch, navigation scrollspy, réseaux + heure de Lomé), colonne droite qui défile, un bouton de thème rond flottant en haut à droite.
-- Deux objets signature : le vinyle-lecteur et l'échiquier jouable. Ce sont les seuls éléments qui ont des couleurs propres, et avec le bouton de thème flottant, les seuls à porter une ombre.
+- Colonne gauche fixe (nom, rôle, ligne de statut, pitch, bouton CV, navigation scrollspy, réseaux + heure de Lomé), colonne droite qui défile, et un dock flottant en bas au centre qui regroupe le mini-lecteur, le sélecteur de langue et la bascule de thème.
+- Deux objets signature : le vinyle-lecteur et l'échiquier jouable. Ce sont les seuls éléments qui ont des couleurs propres, et avec le dock, les seuls à porter une ombre.
 - Pas de card au repos : une surface n'apparaît qu'au survol.
 - Tout le mouvement se coupe sous `prefers-reduced-motion`.
 
@@ -189,7 +198,7 @@ Une seule famille chromatique, vert profond à 155°, déclinée en neutres à p
 
 **The Block-Scale Accent Rule.** Dans l'interface, l'accent reste rare (états et liens). Il ne s'engage en masse qu'à l'échelle d'un bloc entier, sur les couvertures de projets, et toujours en tons de la même teinte.
 
-**The Equal Themes Rule.** Chaque token existe en clair et en sombre, réglé pour son fond. Le thème suit la préférence système jusqu'à ce que le visiteur choisisse avec le bouton de thème ; son choix (`localStorage` clé `theme`) est posé en `data-theme` sur `<html>` par un script inline avant le premier rendu. Les valeurs sombres s'appliquent sous `:root[data-theme="dark"]` et sous `@media (prefers-color-scheme: dark)` pour `:root:not([data-theme="light"])` ; toute règle dépendante du thème (tokens, tons de couverture) doit être écrite pour ces deux sélecteurs.
+**The Equal Themes Rule.** Chaque token existe en clair et en sombre, réglé pour son fond. Le thème suit la préférence système jusqu'à ce que le visiteur choisisse avec le bouton de thème ; son choix (`localStorage` clé `theme`) est posé en `data-theme` sur `<html>` par un script inline avant le premier rendu (composant `InlineScript` : exécutable au premier chargement, inerte en `text/plain` lors d'un rendu côté client), puis réappliqué par la bascule de thème à son montage. Les valeurs sombres s'appliquent sous `:root[data-theme="dark"]` et sous `@media (prefers-color-scheme: dark)` pour `:root:not([data-theme="light"])` ; toute règle dépendante du thème (tokens, tons de couverture) doit être écrite pour ces deux sélecteurs.
 
 ## Typography
 
@@ -205,7 +214,7 @@ Une seule famille chromatique, vert profond à 155°, déclinée en neutres à p
 - **Cover title** (Big Shoulders 800, interligne 0.88, tracking -0.02em) : nom de projet sur la couverture typographique ; version mise en avant à `clamp(2.75rem, 7vw, 5rem) × scale`.
 - **Title** (Bricolage 600, 18px) : rôle sous le nom, intitulé d'expérience, nom de projet sous sa couverture.
 - **Body** (Bricolage 400, 17px, interligne 1.7) : texte d'À propos. Descriptions d'expérience et de projet en 15px / 28px. Colonnes contenues (`max-w-sm` pour le pitch, `max-w-xs` pour le texte d'échecs), `text-pretty` partout.
-- **Label** (Geist Mono 400, 13px, tracking -0.01em, tabulaire) : dates, stack, heure locale, pied de page. 12px dans les couvertures et le lien Spotify, 9px pour les coordonnées de l'échiquier.
+- **Label** (Geist Mono 400, 13px, tracking -0.01em, tabulaire) : dates, stack, heure locale, pied de page. 12px dans les couvertures et le sélecteur de langue, 9px pour les coordonnées de l'échiquier.
 
 ### Named Rules
 **The Same Voice Rule.** Tous les titres en Big Shoulders (nom, sections, contact, couvertures) partagent la même graisse (800) et la même famille de tracking que le nom. Un titre de section ne doit jamais paraître plus léger ou plus serré que le nom. Valeur unique : tracking -0.02em, graisse 800, y compris pour « Échec et mat. ».
@@ -218,34 +227,40 @@ Une seule famille chromatique, vert profond à 155°, déclinée en neutres à p
 
 Conteneur centré `max-w-6xl` (72rem), gouttières 24px puis 48px dès `md`.
 
-**Desktop (≥1024px) :** deux colonnes séparées de 64px. La colonne gauche (42 %) est collante sur toute la hauteur (`100dvh`), défile seule si besoin, sans barre visible : en haut le vinyle, le nom, le rôle, le pitch puis la navigation de sections ; en bas les icônes sociales et « Lomé, Togo · heure locale ». La colonne droite (58 %) défile : À propos, Expérience, Projets, Une partie ?, Contact.
+**Desktop (≥1024px) :** deux colonnes séparées de 64px. La colonne gauche (42 %) est collante sur toute la hauteur (`100dvh`), défile seule si besoin, sans barre visible : en haut le nom, le rôle, la ligne de statut (entreprise actuelle en lien, ville, puis « Ouvert au remote » sur sa propre ligne avec un point `primary`), le pitch, le bouton CV puis la navigation de sections ; en bas les icônes sociales et l'heure de Lomé. La colonne droite (58 %) défile dans l'ordre pensé pour un recruteur, la preuve d'abord : Expérience, Projets (trois sur l'accueil, tous sur `/projets`), À propos, Une partie ?, Contact.
 
 **Mobile et tablette :** tout s'empile ; la navigation disparaît et chaque titre de section devient collant en haut de l'écran (fond `background` à 90 % + léger flou), pleine largeur.
+
+**Dock :** sur tous les écrans, une pastille fixée en bas au centre (16px du bas, zone de sécurité iOS respectée). Les pages gardent 128px de marge basse pour que le dock ne recouvre jamais le pied de page.
+
+**Écrans peu hauts :** la variante `short` (largeur ≥ 1024px et hauteur ≤ 860px) resserre les espacements de la colonne fixe pour qu'elle tienne sans défiler.
 
 **Rythme :** 112px entre sections (144px dès `lg`), 32px sous un titre de section (40px dès `lg`). Projets en grille 2 colonnes dès `sm` (gouttières 24px / 48px), le premier projet occupe les deux colonnes en 16:9, les suivants en 4:3. Expériences en grille date (8.5rem) + contenu dès `sm`. `scroll-mt-16` sur les sections pour les ancres.
 
 ### Named Rules
-**The Fixed Identity Rule.** Sur desktop, l'identité (vinyle, nom, navigation, contact rapide) ne quitte jamais l'écran ; seul le contenu défile.
+**The Fixed Identity Rule.** Sur desktop, l'identité (nom, statut, CV, navigation, contact rapide) ne quitte jamais l'écran ; seul le contenu défile.
+
+**The One Dock Rule.** Tous les contrôles globaux (musique, langue, thème) vivent dans le dock, au même endroit sur ordinateur et sur mobile. Aucun autre bouton flottant. Le dock est centré sans `transform` (`inset-x-0` + `mx-auto`) et sans `backdrop-filter` : l'un comme l'autre capturerait le lecteur Spotify caché, qui doit rester en `position: fixed` pour jouer.
+
+**The Bilingual Rule.** Chaque page existe en `/fr` et `/en` (`app/[lang]`). `proxy.ts` redirige les URL sans langue selon le cookie `NEXT_LOCALE`, puis `Accept-Language`, sinon le français. Les textes d'interface vivent dans `lib/dictionaries.ts` (l'anglais est typé sur le français : une clé oubliée casse la compilation), le contenu dans les champs `Localized` de `lib/content.ts`. Le sélecteur de langue fait un rechargement complet : le lecteur Spotify ne se laisse pas recréer sur une page déjà chargée. Chaque page déclare son canonical et ses `hreflang` (`fr`, `en`, `x-default` → français).
 
 ## Elevation & Depth
 
-Le site est plat ; seuls les objets et l'unique contrôle flottant ont du relief. Le texte, les sections et les lignes n'ont aucune ombre, et la profondeur de l'interface vient d'un passage à `surface` au survol. Le vinyle, sa pastille et l'échiquier sont traités comme des choses posées sur la page, avec des ombres douces teintées de la même teinte.
+Le site est plat ; seuls les objets et le dock ont du relief. Le texte, les sections et les lignes n'ont aucune ombre, et la profondeur de l'interface vient d'un passage à `surface` au survol. L'échiquier et ses pièces sont traités comme des choses posées sur la page, avec des ombres douces teintées de la même teinte ; le disque, intégré au dock, n'a plus d'ombre propre.
 
 ### Shadow Vocabulary
-- **Disque** (`box-shadow: 0 6px 18px oklch(0.2 0.02 155 / 0.25)`) : le vinyle.
-- **Pastille** (`box-shadow: 0 2px 6px oklch(0.2 0.02 155 / 0.3)`) : bouton play/pause sur le disque.
 - **Plateau** (`box-shadow: 0 10px 30px oklch(0.25 0.04 155 / 0.18)`) : l'échiquier.
 - **Pièce** (`drop-shadow: 0 1px 1px oklch(0.2 0.02 155 / 0.35)`) : chaque pièce d'échecs.
-- **Flottant** (`box-shadow: 0 4px 14px oklch(0.2 0.02 155 / 0.12)`) : le bouton de thème, seul élément `fixed` au-dessus du contenu.
+- **Flottant** (`box-shadow: 0 8px 24px oklch(0.2 0.02 155 / 0.16)`) : le dock, seul élément `fixed` au-dessus du contenu.
 
 ### Named Rules
-**The Objects-Only Shadow Rule.** Une ombre signale un objet physique (disque, plateau, pièce) ou un contrôle qui flotte réellement au-dessus du contenu (bouton de thème). Aucune ombre sur une section, une ligne, une couverture ou un lien.
+**The Objects-Only Shadow Rule.** Une ombre signale un objet physique (plateau, pièce) ou le contrôle qui flotte réellement au-dessus du contenu (le dock). Aucune ombre sur une section, une ligne, une couverture ou un lien.
 
 **The Hover Surface Rule.** Les surfaces n'existent pas au repos : une ligne d'expérience prend `surface` et un coin arrondi seulement au survol, sur desktop.
 
 ## Shapes
 
-Coins généreux et doux sur les blocs (1.05rem, `rounded-xl` dérivé de `--radius: 0.75rem`) : couvertures de projets et lignes d'expérience au survol. L'échiquier a des coins plus serrés (12px), le focus 4px. Le cercle est réservé au vinyle, à son étiquette (portrait, ~70 % du disque), à sa pastille, au bouton de thème et aux points de coups possibles. Pas de bordure de bloc : les seuls traits sont le soulignement des liens, le trait de la navigation et le liseré du disque.
+Coins généreux et doux sur les blocs (1.05rem, `rounded-xl` dérivé de `--radius: 0.75rem`) : couvertures de projets et lignes d'expérience au survol. L'échiquier a des coins plus serrés (12px), le focus 4px. Le cercle est réservé au vinyle, à son étiquette (avatar illustré, ~70 % du disque), à sa pastille, au dock, à la langue active, à la bascule de thème et aux points de coups possibles. Pas de bordure de bloc : les seuls traits sont le soulignement des liens, le trait de la navigation et le liseré du disque.
 
 **The Vinyl Texture Exception.** Les sillons du disque (`repeating-radial-gradient`) sont le seul dégradé du système : une texture de matière, pas une décoration. Aucun autre dégradé.
 
@@ -256,8 +271,11 @@ Coins généreux et doux sur les blocs (1.05rem, `rounded-xl` dérivé de `--rad
 - **Email de contact :** bouton qui copie l'adresse (icône copier → coche pendant 1.8s, annonce `aria-live`), Bricolage 500 18px en `primary`, soulignement `primary` à 40 % qui se renforce au survol, cible ≥44px. Repli `mailto:` si le presse-papier échoue.
 - **Icônes sociales :** GitHub, LinkedIn, Articles (blog, icône plume `PenLine`), Email, 19px, trait 1.75, cible 44px, `muted-foreground` → `primary` au survol avec une montée de 2px.
 
-### Bouton de thème
-Bouton rond de 44px fixé en haut à droite (16px du bord, 24px dès `md`), au-dessus de tout : fond `background` à 85 % flouté, liseré `border`, icône lune (vers le sombre) ou soleil (vers le clair) 18px trait 1.75 en `foreground`. Survol : liseré et icône en `primary`, échelle 1.05, l'icône pivote de 20° ; appui 0.95. L'icône reste invisible tant que le thème n'est pas connu côté client. `aria-label` décrit l'action (« Passer en mode sombre »).
+### Dock
+Pastille fixée en bas au centre, fond `background` plein, liseré `border`, ombre « Flottant », padding 6px. Trois groupes séparés par un trait vertical de 20px en `border` : le mini-lecteur, le sélecteur de langue, la bascule de thème (`role="toolbar"`, `aria-label` traduit).
+- **Sélecteur de langue :** contrôle segmenté FR / EN, Geist Mono 500 12px en capitales, cases de 36px ; la langue active en `foreground` sur fond, les autres en `muted-foreground`. Lien classique vers la même page dans l'autre langue (rechargement complet), qui mémorise le choix dans le cookie `NEXT_LOCALE`.
+- **Bascule de thème :** bouton rond de 36px, icône lune (vers le sombre) ou soleil (vers le clair) 17px trait 1.75 en `muted-foreground`. Survol : fond `surface`, icône en `primary` qui pivote de 20° ; appui 0.95. L'icône reste invisible tant que le thème n'est pas connu côté client. `aria-label` décrit l'action (« Passer en mode sombre »).
+- **Changement de thème :** révélation circulaire (View Transitions API) : le nouveau thème grandit en cercle depuis le bouton jusqu'à couvrir l'écran, 700ms, `cubic-bezier(0.65, 0, 0.35, 1)`, centre et rayon en pourcentages (robuste à l'échelle de capture). Sans API ou sous `prefers-reduced-motion`, bascule instantanée.
 
 ### Navigation
 - **Scrollspy à trait :** liste verticale de la colonne gauche (desktop uniquement), Bricolage 500 14px, hauteur 40px. Chaque lien est précédé d'un trait de 1px : 28px en `border` au repos, 56px en `foreground` au survol, 56px en `primary` quand la section est active (texte en `foreground`, `aria-current`). La section active est celle qui traverse la bande centrale de l'écran (IntersectionObserver, marge -40 % / -55 %). Transitions 200–300ms.
@@ -265,10 +283,10 @@ Bouton rond de 44px fixé en haut à droite (16px du bord, 24px dès `md`), au-d
 
 ### Cards / Containers
 - **Ligne d'expérience :** pas de card. Date en mono à gauche, intitulé + description + stack à droite ; au survol (desktop) fond `surface`, coins 1.05rem, padding 20px.
-- **Couverture de projet :** capture réelle (`image`, `object-top`, zoom 1.03 au survol) si elle existe ; sinon couverture typographique : nom du projet énorme en Big Shoulders 800 posé en bas, stack en mono 12px en haut, sur un ton plat de la teinte (cycle des trois tons), montée de 6px du titre au survol. Le nom sous la couverture passe en `primary` et sa flèche glisse en diagonale.
+- **Couverture de projet :** couverture typographique (nom du projet énorme en Big Shoulders 800 posé en bas, stack en mono 12px en haut, sur un ton de la teinte, cycle des trois tons) posée au-dessus de la capture quand elle existe (`image` ; `imagePosition: "top"` calée en haut à gauche pour une capture, `"center"` pour un logo). Au repos, la couverture est à 78 % et laisse transparaître la capture en niveaux de gris (duotone). Révélation au survol (desktop) : la couverture s'efface, l'image reprend ses couleurs et se dézoome de 1.06 à 1, le titre reste en filigrane à 25 %. Sur écran tactile, la même révélation suit le scroll (`animation-timeline` sur la vue de la carte, de l'entrée à mi-écran) ; sans support ou sous `prefers-reduced-motion`, l'image s'affiche directement. Le nom sous la couverture passe en `primary` et sa flèche glisse en diagonale ; une ligne mono « En ligne · Code source » donne accès aux deux liens.
 
 ### Vinyle-lecteur (signature)
-Disque de 80px aux sillons fins, portrait en étiquette sur ~70 % du disque, point central couleur fond. Pastille play/pause `primary` de 28px en bas à droite. Le disque tourne (2.4s/tour) uniquement pendant la lecture ; trois barres d'égaliseur `primary` dansent à côté de « En écoute ». Légende en deux lignes (état + consigne) et un petit lien mono « Ouvrir dans Spotify ». Piloté par l'API iFrame Spotify chargée en `requestIdleCallback` ; le lecteur Spotify reste monté à pleine taille (80px × 320px) mais en `opacity: 0`, `pointer-events: none`, `inert`, car Spotify refuse de jouer dans un cadre de hauteur nulle. Si le script échoue, le clic ouvre la playlist dans un nouvel onglet. Survol : échelle 1.04 ; appui : 0.97.
+Disque de 36px dans le dock, aux sillons fins, avatar illustré en étiquette sur ~70 % du disque (zoomé ×1.35 sur le visage). Pastille `primary` de 16px en bas à droite, cerclée de `background` : un play au repos, trois barres d'égaliseur pendant la lecture. Le disque tourne (2.4s/tour) uniquement pendant la lecture, et « En écoute » apparaît à côté (Bricolage 500 13px). Au repos, pas de légende : une infobulle et l'`aria-label` disent « Ce que j'écoute en codant ». Piloté par l'API iFrame Spotify chargée en `requestIdleCallback` ; le lecteur Spotify reste monté à pleine taille (80 × 320px), `fixed`, `opacity: 0`, `pointer-events: none`, `inert`, car Spotify refuse de jouer dans un cadre de hauteur nulle ou capturé par un parent transformé. Un clic avant que le lecteur soit prêt est mémorisé et lance la lecture dès qu'il l'est ; seul un vrai échec de chargement ouvre la playlist dans un nouvel onglet. Survol : échelle 1.06 ; appui : 0.95.
 
 ### Échiquier (signature)
 Mat en un coup, max 20rem de côté, cases vert de club, coordonnées en mono 9px dans la couleur de la case opposée. Pièces Staunton dessinées en SVG (viewBox 45×45), couleurs fixes dans les deux thèmes. Sélection : case jaune et pièce soulevée (×1.1). Coups possibles : points ronds. Mauvais coup : message « Pas encore. » et retour à la position après 1.1s. Mat : roi noir sur case rouge, « Échec et mat. » et invitation à écrire. Chaque case est un bouton avec un `aria-label` complet ; les pièces glissent (380ms) via `transform`.
@@ -276,9 +294,11 @@ Mat en un coup, max 20rem de côté, cases vert de club, coordonnées en mono 9p
 ### Mouvement
 - **Arrivée (settle) :** les blocs de la colonne gauche passent du flou au net en montant de 6px, 700ms, `cubic-bezier(0.16, 1, 0.3, 1)`, décalés de 70ms (`--i`).
 - **Nom :** chaque lettre se pose l'une après l'autre (650ms, +35ms par lettre, départ à 120ms), mot entier insécable, `aria-label` sur le titre.
-- **Révélation au scroll :** `animation-timeline: view()` (montée de 24px, entrée 0–35 %), seulement sous `@supports` ; sans support, le contenu est simplement là.
+- **Apparition au scroll :** `animation-timeline: view()` (montée de 12px, entrée 0–35 %), seulement sous `@supports` ; sans support, le contenu est simplement là.
+- **Révélation des couvertures :** au survol sur desktop, liée au scroll sur écran tactile (voir Couverture de projet).
+- **Changement de thème :** révélation circulaire depuis le dock (voir Dock).
 - **Survols :** montées de 2–6px, changements de couleur 150–200ms.
-- **Réduction :** sous `prefers-reduced-motion`, settle, lettres, révélation, disque, égaliseur et glissement des pièces sont coupés.
+- **Réduction :** sous `prefers-reduced-motion`, settle, lettres, apparition, révélation des couvertures liée au scroll, cercle du thème, disque, égaliseur et glissement des pièces sont coupés.
 
 ## Do's and Don'ts
 
@@ -291,16 +311,20 @@ Mat en un coup, max 20rem de côté, cases vert de club, coordonnées en mono 9p
 - **Do** traiter le vinyle et l'échiquier comme des objets : couleurs fixes, ombres douces teintées, identiques dans les deux thèmes.
 - **Do** laisser la préférence système décider tant que le visiteur n'a pas choisi, puis respecter son choix persistant.
 - **Do** couper tout mouvement sous `prefers-reduced-motion` et prévoir un rendu complet sans `animation-timeline`.
-- **Do** garder des cibles d'au moins 40–44px (navigation, icônes, email, cases de l'échiquier par leur taille).
+- **Do** garder des cibles d'au moins 36–44px (navigation, icônes, email, contrôles du dock, cases de l'échiquier par leur taille).
+- **Do** écrire tout texte visible dans les deux langues : interface dans `lib/dictionaries.ts`, contenu dans un champ `Localized` de `lib/content.ts`.
+- **Do** passer par `InlineScript` pour tout `<script>` rendu dans un composant (thème, JSON-LD).
 
 ### Don't:
 - **Don't** ajouter d'eyebrow ou de surtitre en petites capitales au-dessus d'une section.
 - **Don't** utiliser de dégradé décoratif ; les sillons du vinyle sont la seule exception, en tant que matière.
 - **Don't** poser de card par défaut : une surface apparaît au survol, pas au repos.
-- **Don't** mettre d'ombre ailleurs que sur un objet (disque, pastille, plateau, pièce) ou le bouton de thème flottant.
+- **Don't** mettre d'ombre ailleurs que sur un objet (plateau, pièce) ou le dock.
+- **Don't** ajouter de bouton flottant hors du dock, ni remettre des contrôles en haut de page.
 - **Don't** passer en vert néon sur noir, faux terminal, effet de frappe ou mono généralisée : c'est le cliché « hacker » rejeté.
 - **Don't** réintroduire Geist Sans comme police de texte : jugée trop basique, remplacée par Bricolage Grotesque.
 - **Don't** monter une direction à métaphore : la personnalité passe par la playlist et les échecs, pas par un concept.
 - **Don't** faire de scroll-jacking ni d'animation qui retarde la lecture du contenu.
-- **Don't** masquer le lecteur Spotify en hauteur nulle : il doit rester à taille réelle, invisible et inerte.
+- **Don't** masquer le lecteur Spotify en hauteur nulle, ni le placer sous un parent avec `transform`, `filter` ou `backdrop-filter` : il doit rester `fixed`, à taille réelle, invisible et inerte.
+- **Don't** passer le sélecteur de langue en `<Link>` : la navigation côté client recrée le layout racine et casse le lecteur Spotify.
 - **Don't** utiliser les composants `components/ui` (button, sheet) sans les restyler aux tokens ci-dessus ; ils sont présents mais inutilisés.
