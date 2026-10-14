@@ -5,11 +5,19 @@ import { useState } from "react";
 
 type CopyEmailProps = {
   email: string;
+  /** Libellés traduits, calculés côté serveur. */
+  copyLabel: string;
+  copiedLabel: string;
   className?: string;
 };
 
 /** Copie l'adresse au clic ; le lien mailto reste disponible à côté. */
-export function CopyEmail({ email, className }: CopyEmailProps) {
+export function CopyEmail({
+  email,
+  copyLabel,
+  copiedLabel,
+  className,
+}: CopyEmailProps) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -27,7 +35,7 @@ export function CopyEmail({ email, className }: CopyEmailProps) {
       type="button"
       onClick={copy}
       className={className}
-      aria-label={copied ? "Adresse copiée" : `Copier ${email}`}
+      aria-label={copied ? copiedLabel : copyLabel}
     >
       <span>{email}</span>
       {copied ? (
@@ -36,7 +44,7 @@ export function CopyEmail({ email, className }: CopyEmailProps) {
         <Copy size={14} strokeWidth={1.75} aria-hidden="true" />
       )}
       <span aria-live="polite" className="sr-only">
-        {copied ? "Copiée" : ""}
+        {copied ? copiedLabel : ""}
       </span>
     </button>
   );

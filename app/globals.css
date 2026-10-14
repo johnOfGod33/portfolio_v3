@@ -294,6 +294,7 @@ body {
     opacity: 0.25;
   }
 }
+/* Écrans tactiles (pas de survol) : par défaut, l'image est affichée directement… */
 @media (hover: none) {
   .cover-reveal .cover-image {
     transform: none;
@@ -301,6 +302,61 @@ body {
   }
   .cover-reveal .cover-overlay {
     display: none;
+  }
+}
+
+/* …et si le navigateur gère les animations liées au scroll, la révélation suit le défilement :
+   la couverture s'efface pendant que la carte monte vers le milieu de l'écran. */
+@keyframes cover-clear {
+  from {
+    background-color: color-mix(in oklch, var(--c-bg) 78%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes cover-image-clear {
+  from {
+    filter: grayscale(1);
+    transform: scale(1.06);
+  }
+  to {
+    filter: none;
+    transform: scale(1);
+  }
+}
+@keyframes cover-title-dim {
+  to {
+    opacity: 0.25;
+  }
+}
+@keyframes cover-stack-hide {
+  to {
+    opacity: 0;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (hover: none) and (prefers-reduced-motion: no-preference) {
+    .cover-reveal {
+      view-timeline-name: --cover;
+    }
+    .cover-reveal .cover-overlay {
+      display: flex;
+      animation: cover-clear linear both;
+    }
+    .cover-reveal .cover-image {
+      animation: cover-image-clear linear both;
+    }
+    .cover-reveal .cover-title {
+      animation: cover-title-dim linear both;
+    }
+    .cover-reveal .cover-stack {
+      animation: cover-stack-hide linear both;
+    }
+    .cover-reveal :is(.cover-overlay, .cover-image, .cover-title, .cover-stack) {
+      animation-timeline: --cover;
+      animation-range: entry 60% cover 50%;
+    }
   }
 }
 

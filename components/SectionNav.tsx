@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 
 type SectionNavProps = {
   sections: { id: string; label: string }[];
+  label: string;
 };
 
 /** Navigation de la colonne fixe : surligne la section visible au centre de l'écran. */
-export function SectionNav({ sections }: SectionNavProps) {
+export function SectionNav({ sections, label }: SectionNavProps) {
   const [active, setActive] = useState(sections[0]?.id);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function SectionNav({ sections }: SectionNavProps) {
   }, [sections]);
 
   return (
-    <nav aria-label="Sections">
+    <nav aria-label={label}>
       <ul className="flex flex-col">
         {sections.map(({ id, label }) => {
           const isActive = active === id;

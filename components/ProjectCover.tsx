@@ -6,6 +6,8 @@ type ProjectCoverProps = {
   project: Project;
   index: number;
   featured?: boolean;
+  /** Texte alternatif de la capture, déjà traduit. */
+  alt: string;
 };
 
 /**
@@ -13,7 +15,7 @@ type ProjectCoverProps = {
  * Au survol, la couverture s'efface et révèle l'image ; sans survol possible
  * (écrans tactiles), l'image est affichée directement. Voir .cover-reveal dans globals.css.
  */
-export function ProjectCover({ project, index, featured }: ProjectCoverProps) {
+export function ProjectCover({ project, index, featured, alt }: ProjectCoverProps) {
   const hasImage = Boolean(project.image);
 
   return (
@@ -25,7 +27,7 @@ export function ProjectCover({ project, index, featured }: ProjectCoverProps) {
       {project.image && (
         <Image
           src={project.image}
-          alt={`Aperçu de ${project.name}`}
+          alt={alt}
           fill
           sizes={featured ? "(min-width: 1024px) 600px, 100vw" : "(min-width: 1024px) 300px, 50vw"}
           className={`cover-image object-cover ${

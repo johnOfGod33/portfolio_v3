@@ -1,11 +1,18 @@
 import { ImageResponse } from "next/og";
 
 import { experiences, profile } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionaries";
+import { defaultLocale, hasLocale, locales } from "@/lib/i18n";
 
 // Aperçu affiché quand le lien du portfolio est partagé (LinkedIn, mail, messageries).
-export const alt = `${profile.name} — ${profile.role}`;
+export const alt = `${profile.name} — ${profile.role.fr} / ${profile.role.en}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// Une image par langue, générée au build plutôt qu'à chaque partage.
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 
 // Couleurs du site converties en hex (Satori ne lit pas oklch).
 const colors = {
@@ -29,17 +36,24 @@ async function loadGoogleFont(family: string, weight: number, text: string) {
   }
 }
 
-export default async function Image() {
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: param } = await params;
+  const lang = hasLocale(param) ? param : defaultLocale;
+  const t = getDictionary(lang);
   const currentJob = experiences.find((xp) => !xp.end);
   const status = [
-    currentJob && `Chez ${currentJob.company}`,
+    currentJob && `${t.hero.at} ${currentJob.company[lang]}`,
     profile.location,
-    profile.availability,
+    profile.availability[lang],
   ]
     .filter(Boolean)
     .join("  ·  ");
 
-  const bodyText = [profile.role, profile.pitch, status].join(" ");
+  const bodyText = [profile.role[lang], profile.pitch[lang], status].join(" ");
   const [display, body, bodyBold] = await Promise.all([
     loadGoogleFont("Big+Shoulders", 800, profile.shortName),
     loadGoogleFont("Bricolage+Grotesque", 400, bodyText),
@@ -82,7 +96,7 @@ export default async function Image() {
             {profile.shortName}
           </div>
           <div style={{ marginTop: 28, fontSize: 40, fontWeight: 600 }}>
-            {profile.role}
+            {profile.role[lang]}
           </div>
           <div
             style={{
@@ -93,7 +107,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            {profile.pitch}
+            {profile.pitch[lang]}
           </div>
         </div>
         <div

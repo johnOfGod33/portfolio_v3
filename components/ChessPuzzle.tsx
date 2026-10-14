@@ -2,19 +2,13 @@
 
 import { useRef, useState } from "react";
 
+import type { Dictionary } from "@/lib/dictionaries";
+
 import { ChessPieceIcon, type PieceColor, type PieceKind } from "./ChessPieceIcon";
 
 type Piece = { id: string; color: PieceColor; kind: PieceKind; square: string };
 
 const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const NAMES: Record<PieceKind, string> = {
-  K: "roi",
-  Q: "dame",
-  R: "tour",
-  B: "fou",
-  N: "cavalier",
-  P: "pion",
-};
 
 // Mat du couloir : les blancs jouent Ta8#. Le fou b2 et le cavalier e5 noirs
 // ne peuvent ni prendre en a8 ni s'interposer sur la 8e rangée.
@@ -91,7 +85,11 @@ function movesFor(piece: Piece, pieces: Piece[]) {
 
 type Status = "idle" | "wrong" | "solved";
 
-export function ChessPuzzle() {
+type ChessPuzzleProps = {
+  t: Dictionary["chess"];
+};
+
+export function ChessPuzzle({ t }: ChessPuzzleProps) {
   const [pieces, setPieces] = useState(START);
   const [selected, setSelected] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
@@ -154,7 +152,7 @@ export function ChessPuzzle() {
                   key={sq}
                   type="button"
                   onClick={() => onSquare(sq)}
-                  aria-label={`${sq}${piece ? `, ${NAMES[piece.kind]} ${piece.color === "w" ? "blanc" : "noir"}` : ""}${isTarget ? ", coup possible" : ""}`}
+                  aria-label={`${sq}${piece ? `, ${t.pieces[piece.kind]} ${piece.color === "w" ? t.white : t.black}` : ""}${isTarget ? `, ${t.possibleMove}` : ""}`}
                   className={`relative flex items-center justify-center outline-offset-[-2px] ${
                     dark ? "bg-(--sq-dark)" : "bg-(--sq-light)"
                   } ${piece?.color === "w" || isTarget ? "cursor-pointer" : "cursor-default"}`}
@@ -219,12 +217,12 @@ export function ChessPuzzle() {
         {status === "solved" ? (
           <>
             <p className="display text-[calc(1.25rem*var(--heading-scale))] font-extrabold leading-none tracking-[-0.02em] text-foreground">
-              Échec et mat.
+              {t.mate}
             </p>
             <p className="mt-1">
-              Bien vu. On fait une vraie partie ?{" "}
+              {t.wellPlayed}{" "}
               <a href="#contact" className="text-link text-foreground">
-                Écris-moi
+                {t.writeMe}
               </a>
               .
             </p>
@@ -233,19 +231,16 @@ export function ChessPuzzle() {
               onClick={restart}
               className="mono mt-3 min-h-11 text-[13px] text-faint transition-colors hover:text-foreground"
             >
-              Rejouer
+              {t.replay}
             </button>
           </>
         ) : status === "wrong" ? (
           <p>
-            <span className="font-medium text-foreground">Pas encore.</span> Le
-            roi noir s’échappe. Regarde la dernière rangée.
+            <span className="font-medium text-foreground">{t.notYet}</span>{" "}
+            {t.escape}
           </p>
         ) : (
-          <p>
-            Les blancs jouent et matent en un coup. Clique une pièce blanche,
-            puis sa case d’arrivée.
-          </p>
+          <p>{t.intro}</p>
         )}
       </div>
     </div>

@@ -4,12 +4,15 @@ import { Play } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+import type { Dictionary } from "@/lib/dictionaries";
+
 // Types minimaux de l'API iFrame Spotify : https://developer.spotify.com/documentation/embeds/references/iframe-api
 type PlaybackEvent = {
   data: { isPaused: boolean; isBuffering: boolean; position: number };
 };
 type SpotifyController = {
   togglePlay: () => void;
+  play: () => void;
   addListener: (
     event: "ready" | "playback_update",
     cb: (e: PlaybackEvent) => void,
@@ -34,17 +37,20 @@ const SCRIPT_SRC = "https://open.spotify.com/embed/iframe-api/v1";
 type VinylPlayerProps = {
   playlistId: string;
   playlistUrl: string;
+  t: Dictionary["vinyl"];
 };
 
 /**
  * Le portrait sert d'étiquette à un vinyle : un clic lance la playlist,
  * le disque tourne et un égaliseur remplace le bouton play pendant la lecture.
- * Mini-lecteur flottant sur mobile, intégré à la colonne fixe sur ordinateur.
+ * Il vit dans le dock, avec le sélecteur de langue et la bascule de thème.
  * Le lecteur Spotify reste caché.
  */
-export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
+export function VinylPlayer({ playlistId, playlistUrl, t }: VinylPlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<SpotifyController | null>(null);
+  // Clic arrivé avant que le lecteur soit prêt : la lecture démarre dès qu'il l'est.
+  const pendingPlayRef = useRef(false);
   const [failed, setFailed] = useState(false);
   const [playing, setPlaying] = useState(false);
 
@@ -59,6 +65,10 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
         { uri: `spotify:playlist:${playlistId}`, width: "100%", height: 80 },
         (controller) => {
           controllerRef.current = controller;
+          if (pendingPlayRef.current) {
+            pendingPlayRef.current = false;
+            controller.play();
+          }
           // Le premier événement annonce isPaused: false avant toute lecture ;
           // on attend que la position avance pour considérer le disque en lecture.
           controller.addListener("playback_update", (e) => {
@@ -67,6 +77,7 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
         },
       );
     };
+
 
     const load = () => {
       if (document.querySelector(`script[src="${SCRIPT_SRC}"]`)) return;
@@ -85,56 +96,57 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
   }, [playlistId]);
 
   function toggle() {
-    if (failed || !controllerRef.current) {
+    // Seul un vrai échec de chargement renvoie vers Spotify.
+    if (failed) {
       window.open(playlistUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (!controllerRef.current) {
+      pendingPlayRef.current = true;
       return;
     }
     controllerRef.current.togglePlay();
   }
 
-  const label = playing
-    ? "Mettre en pause ma playlist"
-    : "Écouter ce que j’écoute en codant";
+  const label = playing ? t.pause : t.play;
 
   return (
-    // Mini-lecteur : pastille flottante en bas à gauche sur mobile,
-    // intégré au bas de la colonne fixe sur ordinateur (lg).
-    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-3 rounded-full border border-border bg-background/85 p-1.5 shadow-[0_8px_24px_oklch(0.2_0.02_155/0.18)] backdrop-blur-md lg:static lg:z-auto lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none">
+    // Mini-lecteur intégré au dock (voir Dock.tsx) : un petit disque, et « En écoute » pendant la lecture.
+    <div className="relative flex items-center">
       <button
         type="button"
         onClick={toggle}
         aria-label={label}
         aria-pressed={playing}
-        title={playing ? "En écoute. Clique pour mettre en pause." : "Ce que j’écoute en codant. Clique pour écouter."}
-        className="group relative block size-12 shrink-0 rounded-full transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.97] lg:size-14"
+        title={playing ? t.titlePlaying : t.titleIdle}
+        className="group relative block size-9 shrink-0 rounded-full transition-transform duration-300 ease-out hover:scale-[1.06] active:scale-[0.95]"
       >
         <span
-          className="vinyl absolute inset-0 rounded-full ring-1 ring-border shadow-[0_6px_18px_oklch(0.2_0.02_155/0.25)]"
+          className="vinyl absolute inset-0 rounded-full ring-1 ring-border"
           data-playing={playing}
         >
-          <span className="absolute inset-[15%] overflow-hidden rounded-full ring-1 ring-black/40">
+          <span className="absolute inset-[14%] overflow-hidden rounded-full ring-1 ring-black/40">
             <Image
               src="/avatar.webp"
               alt=""
               fill
-              sizes="56px"
+              sizes="28px"
               className="scale-[1.35] object-cover object-[50%_55%]"
               priority
             />
           </span>
-          <span className="absolute left-1/2 top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-background" />
         </span>
-        <span className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-background shadow-[0_2px_6px_oklch(0.2_0.02_155/0.3)] transition-transform duration-200 group-hover:scale-110 lg:size-6">
+        <span className="absolute -bottom-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-background ring-2 ring-background transition-transform duration-200 group-hover:scale-110">
           {playing ? (
-            <span className="eq flex h-2.5 items-end gap-0.5" aria-hidden="true">
+            <span className="eq flex h-2 items-end gap-px" aria-hidden="true">
               <span className="h-full w-0.5 rounded-full bg-current" />
               <span className="h-full w-0.5 rounded-full bg-current" />
               <span className="h-full w-0.5 rounded-full bg-current" />
             </span>
           ) : (
             <Play
-              size={10}
-              strokeWidth={2.5}
+              size={8}
+              strokeWidth={3}
               fill="currentColor"
               className="translate-x-px"
             />
@@ -142,18 +154,18 @@ export function VinylPlayer({ playlistId, playlistUrl }: VinylPlayerProps) {
         </span>
       </button>
 
-      {/* Légende : toujours visible sur ordinateur ; sur mobile, seulement pendant la lecture. */}
-      <p
-        aria-hidden="true"
-        className={`text-sm font-medium leading-5 text-foreground lg:block ${
-          playing ? "pr-3" : "hidden"
-        }`}
-      >
-        {playing ? "En écoute" : "Ce que j’écoute en codant"}
-      </p>
+      {playing && (
+        <span
+          aria-hidden="true"
+          className="whitespace-nowrap pl-2.5 pr-1 text-[13px] font-medium text-foreground"
+        >
+          {t.playing}
+        </span>
+      )}
 
-      {/* Le lecteur Spotify reste chargé, à sa vraie taille mais transparent :
-          Spotify refuse de jouer dans un cadre de hauteur nulle. Le vinyle le pilote. */}
+      {/* Le lecteur Spotify reste chargé, à sa vraie taille mais transparent, fixé à l'écran :
+          Spotify refuse de jouer dans un cadre de hauteur nulle ou décalé. Le disque le pilote.
+          Aucun parent ne doit avoir de transform/filter/backdrop-filter (voir Dock.tsx). */}
       <div
         className="pointer-events-none fixed bottom-0 left-0 h-20 w-80 opacity-0"
         inert

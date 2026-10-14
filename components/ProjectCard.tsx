@@ -2,18 +2,28 @@ import { ArrowUpRight } from "lucide-react";
 
 import { ProjectCover } from "@/components/ProjectCover";
 import type { Project } from "@/lib/content";
+import type { Dictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
 type ProjectCardProps = {
   project: Project;
   index: number;
+  lang: Locale;
+  t: Dictionary["projects"];
   featured?: boolean;
 };
 
 /** Carte projet : la carte ouvre le site (ou le code), une ligne de liens donne accès aux deux. */
-export function ProjectCard({ project, index, featured }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  index,
+  lang,
+  t,
+  featured,
+}: ProjectCardProps) {
   const links = [
-    { label: "En ligne", href: project.live },
-    { label: "Code source", href: project.code },
+    { label: t.live, href: project.live },
+    { label: t.code, href: project.code },
   ].filter((link) => link.href);
 
   return (
@@ -24,7 +34,12 @@ export function ProjectCard({ project, index, featured }: ProjectCardProps) {
         rel="noopener noreferrer"
         className="group block"
       >
-        <ProjectCover project={project} index={index} featured={featured} />
+        <ProjectCover
+          project={project}
+          index={index}
+          featured={featured}
+          alt={t.previewOf(project.name)}
+        />
         <div className="mt-4 flex items-baseline justify-between gap-4">
           <h3 className="flex items-center gap-1 text-lg font-semibold tracking-normal text-foreground transition-colors duration-150 group-hover:text-primary">
             {project.name}
@@ -40,7 +55,7 @@ export function ProjectCard({ project, index, featured }: ProjectCardProps) {
           )}
         </div>
         <p className="mt-1 text-pretty text-[15px] leading-7">
-          {project.description}
+          {project.description[lang]}
         </p>
       </a>
       <ul className="mt-2 flex flex-wrap gap-x-5">

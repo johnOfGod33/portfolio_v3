@@ -6,30 +6,25 @@ import {
   PenLine,
 } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
 import { ChessPuzzle } from "@/components/ChessPuzzle";
 import { CopyEmail } from "@/components/CopyEmail";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/brand-icons";
+import { InlineScript } from "@/components/InlineScript";
 import { LocalTime } from "@/components/LocalTime";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionNav } from "@/components/SectionNav";
-import { VinylPlayer } from "@/components/VinylPlayer";
 import { experiences, profile, projects, socials, stack } from "@/lib/content";
 import { formatDuration, formatPeriod } from "@/lib/dates";
+import { getDictionary } from "@/lib/dictionaries";
+import { hasLocale, intlLocale, type Locale } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
 // Nombre de projets affichés sur l’accueil ; les autres sont sur /projets.
 const HOME_PROJECTS = 3;
 
-// Ordre pensé pour un recruteur : la preuve d’abord, le parcours ensuite.
-const sections = [
-  { id: "experience", label: "Expérience" },
-  { id: "projets", label: "Projets" },
-  { id: "a-propos", label: "À propos" },
-  { id: "partie", label: "Une partie ?" },
-  { id: "contact", label: "Contact" },
-];
 
 const socialIcons = {
   GitHub: GithubIcon,
@@ -52,32 +47,34 @@ const contactLinks = socials.filter((social) =>
 );
 
 // Données structurées schema.org : aident Google à comprendre qui est la personne du site.
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.name,
-  jobTitle: profile.role,
-  description: profile.pitch,
-  url: siteUrl,
-  image: `${siteUrl}/avatar.webp`,
-  email: `mailto:${profile.email}`,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Lomé",
-    addressCountry: "TG",
-  },
-  ...(currentJob && {
-    worksFor: {
-      "@type": "Organization",
-      name: currentJob.company,
-      url: currentJob.url,
+function personJsonLd(lang: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    jobTitle: profile.role[lang],
+    description: profile.pitch[lang],
+    url: `${siteUrl}/${lang}`,
+    image: `${siteUrl}/avatar.webp`,
+    email: `mailto:${profile.email}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Lomé",
+      addressCountry: "TG",
     },
-  }),
-  knowsAbout: stack,
-  sameAs: socials
-    .map((social) => social.href)
-    .filter((href) => href.startsWith("http")),
-};
+    ...(currentJob && {
+      worksFor: {
+        "@type": "Organization",
+        name: currentJob.company[lang],
+        url: currentJob.url,
+      },
+    }),
+    knowsAbout: stack,
+    sameAs: socials
+      .map((social) => social.href)
+      .filter((href) => href.startsWith("http")),
+  };
+}
 
 /** Met en avant les passages entourés de **…** (chiffres clés des expériences). */
 function Emphasis({ text }: { text: string }) {
@@ -95,7 +92,7 @@ function Emphasis({ text }: { text: string }) {
 /** Titre de section : collant sur mobile (la navigation disparaît), en display sur desktop. */
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="display sticky top-0 z-10 -mx-6 mb-8 bg-background/90 py-4 pl-6 pr-20 text-[calc(1.75rem*var(--heading-scale))] font-extrabold leading-none tracking-[-0.02em] text-foreground backdrop-blur-sm lg:static lg:mx-0 lg:mb-10 lg:bg-transparent lg:p-0 lg:pr-0 lg:text-[calc(2.25rem*var(--heading-scale))] lg:backdrop-blur-none">
+    <h2 className="display sticky top-0 z-10 -mx-6 mb-8 bg-background/90 px-6 py-4 text-[calc(1.75rem*var(--heading-scale))] font-extrabold leading-none tracking-[-0.02em] text-foreground backdrop-blur-sm lg:static lg:mx-0 lg:mb-10 lg:bg-transparent lg:p-0 lg:pr-0 lg:text-[calc(2.25rem*var(--heading-scale))] lg:backdrop-blur-none">
       {children}
     </h2>
   );
@@ -131,34 +128,45 @@ function AnimatedName({ text }: { text: string }) {
   );
 }
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const t = getDictionary(lang);
+
+  // Ordre pensé pour un recruteur : la preuve d’abord, le parcours ensuite.
+  const sections = [
+    { id: "experience", label: t.nav.experience },
+    { id: "projets", label: t.nav.projects },
+    { id: "a-propos", label: t.nav.about },
+    { id: "partie", label: t.nav.game },
+    { id: "contact", label: t.nav.contact },
+  ];
+
   return (
     <div className="mx-auto max-w-6xl px-6 md:px-12 lg:flex lg:justify-between lg:gap-16">
-      <script
+      <InlineScript
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
-        }}
+        html={JSON.stringify(personJsonLd(lang)).replace(/</g, "\\u003c")}
       />
       <header className="flex flex-col pt-14 sm:pt-20 lg:sticky lg:top-0 lg:h-dvh lg:w-[42%] lg:justify-between lg:overflow-y-auto lg:py-20 lg:[scrollbar-width:none] short:py-10">
         <div>
           <AnimatedName text={profile.shortName} />
           <div className="settle" style={{ "--i": 3 } as React.CSSProperties}>
             <p className="mt-4 text-lg font-semibold text-foreground">
-              {profile.role}
+              {profile.role[lang]}
             </p>
             <p className="mt-1.5 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
               {currentJob && (
                 <>
                   <span>
-                    Chez{" "}
+                    {t.hero.at}{" "}
                     <a
                       href={currentJob.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-link text-foreground"
                     >
-                      {currentJob.company}
+                      {currentJob.company[lang]}
                     </a>
                   </span>
                   <span aria-hidden="true">·</span>
@@ -171,11 +179,11 @@ export default function Home() {
                   aria-hidden="true"
                   className="size-1.5 rounded-full bg-primary"
                 />
-                {profile.availability}
+                {profile.availability[lang]}
               </span>
             </p>
             <p className="mt-3 max-w-sm text-pretty leading-7 text-muted-foreground">
-              {profile.pitch}
+              {profile.pitch[lang]}
             </p>
             <a
               href={profile.cvUrl}
@@ -187,7 +195,7 @@ export default function Home() {
                 aria-hidden="true"
                 className="transition-transform duration-200 ease-out group-hover:translate-y-0.5"
               />
-              Télécharger mon CV
+              {t.hero.cv}
             </a>
           </div>
 
@@ -195,18 +203,11 @@ export default function Home() {
             className="settle mt-12 hidden lg:block short:mt-6"
             style={{ "--i": 4 } as React.CSSProperties}
           >
-            <SectionNav sections={sections} />
+            <SectionNav sections={sections} label={t.nav.label} />
           </div>
         </div>
 
         <div className="mt-10 short:mt-6">
-          {/* Hors du bloc animé : un filter/transform sur un parent casserait le position: fixed du mini-lecteur mobile. */}
-          <div className="lg:mb-6 short:mb-4">
-            <VinylPlayer
-              playlistId={profile.playlistId}
-              playlistUrl={profile.playlistUrl}
-            />
-          </div>
           <div
             className="settle flex items-center justify-between gap-6"
             style={{ "--i": 5 } as React.CSSProperties}
@@ -231,20 +232,24 @@ export default function Home() {
               ))}
             </ul>
             <p className="mono text-[13px] text-faint">
-              <LocalTime timeZone={profile.timeZone} /> à Lomé
+              <LocalTime
+                timeZone={profile.timeZone}
+                locale={intlLocale[lang]}
+              />{" "}
+              {t.hero.inLome}
             </p>
           </div>
         </div>
       </header>
 
-      <main className="pb-24 pt-16 text-muted-foreground lg:w-[58%] lg:py-20">
+      <main className="pb-32 pt-16 text-muted-foreground lg:w-[58%] lg:py-20">
         <section
           id="experience"
           aria-labelledby="h-experience"
           className="mb-28 scroll-mt-16 lg:mb-36"
         >
           <SectionHeading>
-            <span id="h-experience">Expérience</span>
+            <span id="h-experience">{t.nav.experience}</span>
           </SectionHeading>
           <ol className="flex flex-col gap-3">
             {experiences.map((xp) => (
@@ -253,12 +258,12 @@ export default function Home() {
                 className="reveal grid gap-x-8 gap-y-2 sm:grid-cols-[8.5rem_1fr] lg:-mx-5 lg:rounded-xl lg:p-5 lg:transition-colors lg:duration-200 lg:hover:bg-surface"
               >
                 <p className="mono flex flex-col pt-1 text-[13px] text-faint">
-                  <span>{formatPeriod(xp.start, xp.end)}</span>
-                  <span>{formatDuration(xp.start, xp.end)}</span>
+                  <span>{formatPeriod(lang, xp.start, xp.end)}</span>
+                  <span>{formatDuration(lang, xp.start, xp.end)}</span>
                 </p>
                 <div>
                   <h3 className="text-lg font-semibold tracking-normal text-foreground">
-                    {xp.title} ·{" "}
+                    {xp.title[lang]} ·{" "}
                     {xp.url ? (
                       <a
                         href={xp.url}
@@ -266,7 +271,7 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-1 transition-colors duration-150 hover:text-primary"
                       >
-                        {xp.company}
+                        {xp.company[lang]}
                         <ArrowUpRight
                           size={16}
                           strokeWidth={2}
@@ -275,11 +280,11 @@ export default function Home() {
                         />
                       </a>
                     ) : (
-                      xp.company
+                      xp.company[lang]
                     )}
                   </h3>
                   <p className="mt-1.5 text-pretty text-[15px] leading-7">
-                    <Emphasis text={xp.summary} />
+                    <Emphasis text={xp.summary[lang]} />
                   </p>
                   <p className="mono mt-3 text-[13px] text-faint">
                     {xp.stack.join(" · ")}
@@ -296,7 +301,7 @@ export default function Home() {
           className="mb-28 scroll-mt-16 lg:mb-36"
         >
           <SectionHeading>
-            <span id="h-projets">Projets</span>
+            <span id="h-projets">{t.nav.projects}</span>
           </SectionHeading>
           <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2">
             {projects.slice(0, HOME_PROJECTS).map((project, i) => (
@@ -304,16 +309,18 @@ export default function Home() {
                 key={project.name}
                 project={project}
                 index={i}
+                lang={lang}
+                t={t.projects}
                 featured={i === 0}
               />
             ))}
           </ul>
           {projects.length > HOME_PROJECTS && (
             <Link
-              href="/projets"
+              href={`/${lang}/projets`}
               className="group mt-10 inline-flex min-h-11 items-center gap-2 font-medium text-foreground transition-colors duration-150 hover:text-primary"
             >
-              Voir tous les projets
+              {t.projects.seeAll}
               <span className="mono text-[13px] font-normal text-faint">
                 {projects.length}
               </span>
@@ -333,27 +340,13 @@ export default function Home() {
           className="mb-28 scroll-mt-16 lg:mb-36"
         >
           <SectionHeading>
-            <span id="h-a-propos">À propos</span>
+            <span id="h-a-propos">{t.nav.about}</span>
           </SectionHeading>
           <div className="reveal flex flex-col gap-4 text-pretty text-[17px] leading-[1.7]">
             <p>
-              Je suis ingénieur logiciel au Togo, en{" "}
-              <span className="font-semibold text-foreground">
-                M2 intelligence artificielle à l’ESGIS
-              </span>
-              . Au départ, j’ai fait une{" "}
-              <span className="font-semibold text-foreground">
-                licence en génie mécanique
-              </span>
-              , puis je me suis entièrement reconverti dans la tech parce que
-              j’aimais trop ça pour rester ailleurs. Ce virage m’a appris à
-              apprendre vite.
+              <Emphasis text={t.about.intro} />
             </p>
-            <p>
-              Hors du code, il y a la musique, les échecs, les jeux vidéo et
-              beaucoup de lecture. Le disque avec ma photo, c’est justement ce
-              que j’écoute en codant. Clique dessus, ça se lance ici.
-            </p>
+            <p>{t.about.outside}</p>
             <p className="mono pt-2 text-[13px] text-faint">
               {stack.join(" · ")}
             </p>
@@ -366,10 +359,10 @@ export default function Home() {
           className="mb-28 scroll-mt-16 lg:mb-36"
         >
           <SectionHeading>
-            <span id="h-partie">Une partie ?</span>
+            <span id="h-partie">{t.nav.game}</span>
           </SectionHeading>
           <div className="reveal">
-            <ChessPuzzle />
+            <ChessPuzzle t={t.chess} />
           </div>
         </section>
 
@@ -382,10 +375,12 @@ export default function Home() {
             id="h-contact"
             className="display reveal max-w-lg text-balance text-[calc(clamp(2rem,4.5vw,3rem)*var(--heading-scale))] font-extrabold leading-[1] tracking-[-0.02em] text-foreground"
           >
-            Un projet, un poste, une question ? Écris-moi.
+            {t.contact.heading}
           </h2>
           <CopyEmail
             email={profile.email}
+            copyLabel={t.contact.copy(profile.email)}
+            copiedLabel={t.contact.copied}
             className="mt-6 inline-flex min-h-11 items-center gap-2 text-lg font-medium text-primary underline decoration-primary/40 decoration-1 underline-offset-[6px] transition-colors duration-150 hover:decoration-primary"
           />
           <ul className="mt-2 flex flex-wrap gap-x-6">
@@ -395,7 +390,7 @@ export default function Home() {
                 className="mono inline-flex min-h-11 items-center gap-1.5 text-[13px] text-muted-foreground transition-colors duration-150 hover:text-primary"
               >
                 <Download size={13} strokeWidth={2} aria-hidden="true" />
-                Mon CV
+                {t.contact.cv}
               </a>
             </li>
             {contactLinks.map((link) => (

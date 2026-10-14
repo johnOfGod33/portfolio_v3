@@ -1,16 +1,20 @@
-// Contenu du portfolio.
+// Contenu du portfolio. Les champs Localized existent en français et en anglais.
+
+import type { Localized } from "@/lib/i18n";
 
 export const profile = {
   name: "Jean de Dieu Sessou",
   shortName: "Jean de Dieu",
-  role: "Ingénieur backend",
+  role: { fr: "Ingénieur backend", en: "Backend Engineer" } as Localized,
   location: "Lomé, Togo",
   /** Disponibilité affichée sous le rôle. */
-  availability: "Ouvert au remote",
+  availability: { fr: "Ouvert au remote", en: "Open to remote" } as Localized,
   timeZone: "Africa/Lome",
   email: "sessoujeandedieu@gmail.com",
-  pitch:
-    "Je transforme des idées en applications propres, livrées vite et prêtes à grandir.",
+  pitch: {
+    fr: "Je transforme des idées en applications propres, livrées vite et prêtes à grandir.",
+    en: "I turn ideas into clean applications, shipped fast and ready to grow.",
+  } as Localized,
   // CV sur Google Drive : téléchargement direct du PDF (fichier partagé publiquement).
   // Aperçu : https://drive.google.com/file/d/1f_BlZEG-yheUAmi4xLB_oncQrtxhlPhx/view
   cvUrl:
@@ -43,7 +47,7 @@ export const stack = [
 
 export type Project = {
   name: string;
-  description: string;
+  description: Localized;
   stack: string[];
   year?: string;
   /** Site en ligne ou doc d’API. */
@@ -62,8 +66,10 @@ const GH_RAW = "https://raw.githubusercontent.com/johnOfGod33";
 export const projects: Project[] = [
   {
     name: "Kizo",
-    description:
-      "J’ai cofondé et construit Kizo, une plateforme pour découvrir des événements, recevoir des rappels pensés pour soi et retrouver d’autres gens autour des mêmes expériences.",
+    description: {
+      fr: "J’ai cofondé et construit Kizo, une plateforme pour découvrir des événements, recevoir des rappels pensés pour soi et retrouver d’autres gens autour des mêmes expériences.",
+      en: "I co-founded and built Kizo, a platform to discover events, get reminders tailored to you and meet people around the same experiences.",
+    },
     stack: ["Next.js", "TypeScript", "Supabase", "MongoDB"],
     live: "https://kizoapp.com",
     image: "/projects/kizo.png",
@@ -71,8 +77,10 @@ export const projects: Project[] = [
   },
   {
     name: "Personal Blog API",
-    description:
-      "L’API REST qui fait tourner un blog. Elle gère les articles, les catégories, l’authentification JWT et les accès publics ou privés, le tout documenté avec Swagger.",
+    description: {
+      fr: "L’API REST qui fait tourner un blog. Elle gère les articles, les catégories, l’authentification JWT et les accès publics ou privés, le tout documenté avec Swagger.",
+      en: "The REST API behind a blog. It handles posts, categories, JWT authentication and public or private access, all documented with Swagger.",
+    },
     stack: ["Node.js", "Express", "MongoDB", "Redis"],
     year: "2024",
     live: "https://personal-blog-api-7cge.onrender.com/api-docs/",
@@ -81,8 +89,10 @@ export const projects: Project[] = [
   },
   {
     name: "Password Generator",
-    description:
-      "Tu choisis la longueur, les symboles et les chiffres, il génère le mot de passe et te dit tout de suite s’il est solide.",
+    description: {
+      fr: "Tu choisis la longueur, les symboles et les chiffres, il génère le mot de passe et te dit tout de suite s’il est solide.",
+      en: "You pick the length, symbols and numbers; it generates the password and tells you right away whether it’s strong.",
+    },
     stack: ["JavaScript", "SCSS", "HTML"],
     year: "2024",
     live: "https://johnofgod33.github.io/password-generator/",
@@ -91,8 +101,10 @@ export const projects: Project[] = [
   },
   {
     name: "Admin Blog Panel",
-    description:
-      "L’interface d’administration du blog. On s’y connecte pour écrire, modifier et publier ses articles, brouillons compris. Elle tourne sur Personal Blog API.",
+    description: {
+      fr: "L’interface d’administration du blog. On s’y connecte pour écrire, modifier et publier ses articles, brouillons compris. Elle tourne sur Personal Blog API.",
+      en: "The blog’s admin interface. You log in to write, edit and publish posts, drafts included. It runs on Personal Blog API.",
+    },
     stack: ["React", "React Router", "Axios"],
     year: "2024",
     code: "https://github.com/johnOfGod33/admin-blog-panel",
@@ -100,8 +112,10 @@ export const projects: Project[] = [
   },
   {
     name: "Caching Proxy CLI",
-    description:
-      "Un outil en ligne de commande qui lance un proxy de cache. Il intercepte les requêtes HTTP et garde les réponses dans Redis, ce qui évite de rappeler le serveur d’origine pour rien.",
+    description: {
+      fr: "Un outil en ligne de commande qui lance un proxy de cache. Il intercepte les requêtes HTTP et garde les réponses dans Redis, ce qui évite de rappeler le serveur d’origine pour rien.",
+      en: "A command-line tool that spins up a caching proxy. It intercepts HTTP requests and keeps the responses in Redis, so the origin server isn’t called for nothing.",
+    },
     stack: ["TypeScript", "Express", "Redis"],
     year: "2024",
     code: "https://github.com/johnOfGod33/Caching-Proxy-CLI",
@@ -114,12 +128,12 @@ export type Experience = {
   start: string;
   /** Fin au format AAAA-MM ; absent pour un poste en cours. */
   end?: string;
-  title: string;
-  company: string;
+  title: Localized;
+  company: Localized;
   /** Site de l’entreprise. */
   url?: string;
   /** Résumé de ce qui a été accompli. Les passages entre **…** sont mis en avant. */
-  summary: string;
+  summary: Localized;
   stack: string[];
 };
 
@@ -127,20 +141,24 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     start: "2025-02",
-    title: "Ingénieur backend junior",
-    company: "EdoMatch",
+    title: { fr: "Ingénieur backend junior", en: "Junior Backend Engineer" },
+    company: { fr: "EdoMatch", en: "EdoMatch" },
     url: "https://www.edomatch.com",
-    summary:
-      "Je travaille sur le backend d’une plateforme de recrutement qui compte **plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises**. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité **plus de 3 000 candidatures**, et une génération d’offres d’emploi **adoptée par 3 000 entreprises**. Côté données, je conçois et sécurise la base MongoDB : les chargements sont **40 % plus rapides** et l’API répond **25 % plus vite** grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
+    summary: {
+      fr: "Je travaille sur le backend d’une plateforme de recrutement qui compte **plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises**. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité **plus de 3 000 candidatures**, et une génération d’offres d’emploi **adoptée par 3 000 entreprises**. Côté données, je conçois et sécurise la base MongoDB : les chargements sont **40 % plus rapides** et l’API répond **25 % plus vite** grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
+      en: "I work on the backend of a recruiting platform with **over 50,000 profiles, 6,500 active job listings and 3,000 companies**. I built its AI features: the FastAPI services that read and structure CVs for the OpenAI-embeddings recommendation engine, an n8n pipeline that has processed **over 3,000 applications**, and job-posting generation **adopted by 3,000 companies**. On the data side, I design and secure the MongoDB database: pages load **40% faster** and the API responds **25% faster** thanks to a CI/CD pipeline on AWS. And when an incident hits production, I’m the one debugging it.",
+    },
     stack: ["Python", "FastAPI", "MongoDB", "OpenAI", "n8n", "AWS"],
   },
   {
     start: "2024-07",
     end: "2024-09",
-    title: "Développeur frontend",
-    company: "Projet Business Manager",
-    summary:
-      "Une application de gestion de stock en React, avec suivi des produits et reporting en temps réel via l’API. Je travaillais main dans la main avec le développeur backend et le chef de projet pour que l’ensemble reste cohérent.",
+    title: { fr: "Développeur frontend", en: "Frontend Developer" },
+    company: { fr: "Projet Business Manager", en: "Business Manager project" },
+    summary: {
+      fr: "Une application de gestion de stock en React, avec suivi des produits et reporting en temps réel via l’API. Je travaillais main dans la main avec le développeur backend et le chef de projet pour que l’ensemble reste cohérent.",
+      en: "A stock management app in React, with product tracking and real-time reporting through the API. I worked closely with the backend developer and the project manager to keep the whole thing consistent.",
+    },
     stack: ["React"],
   },
 ];

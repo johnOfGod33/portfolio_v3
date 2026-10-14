@@ -1,7 +1,9 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+
+import type { Dictionary } from "@/lib/dictionaries";
 
 type Theme = "light" | "dark";
 
@@ -30,10 +32,27 @@ function subscribe(onChange: () => void) {
   };
 }
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  t: Dictionary["theme"];
+};
+
+export function ThemeToggle({ t }: ThemeToggleProps) {
   // null côté serveur : le thème n'est connu qu'une fois dans le navigateur.
   const theme = useSyncExternalStore<Theme | null>(subscribe, getTheme, () => null);
   const next: Theme = theme === "dark" ? "light" : "dark";
+
+  // Changer de langue recrée <html> côté client et efface le data-theme posé par le
+  // script de démarrage : on réapplique le choix mémorisé à chaque montage.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY);
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch {
+      // stockage indisponible : préférence système
+    }
+  }, []);
 
   function applyTheme() {
     document.documentElement.dataset.theme = next;
@@ -78,19 +97,19 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={next === "dark" ? "Passer en mode sombre" : "Passer en mode clair"}
-      title={next === "dark" ? "Mode sombre" : "Mode clair"}
-      className="group fixed right-4 top-4 z-50 flex size-11 items-center justify-center rounded-full border border-border bg-background/85 text-foreground shadow-[0_4px_14px_oklch(0.2_0.02_155/0.12)] backdrop-blur-md transition-[color,transform,border-color] duration-200 hover:scale-105 hover:border-primary hover:text-primary active:scale-95 md:right-6 md:top-6"
+      aria-label={next === "dark" ? t.toDark : t.toLight}
+      title={next === "dark" ? t.dark : t.light}
+      className="group flex size-9 items-center justify-center rounded-full text-muted-foreground transition-[color,background-color,transform] duration-200 hover:bg-surface hover:text-primary active:scale-95"
     >
       <span
         key={theme ?? "pending"}
         className="flex transition-transform duration-500 ease-out group-hover:rotate-[20deg]"
       >
         {theme === "dark" ? (
-          <Sun size={18} strokeWidth={1.75} aria-hidden="true" />
+          <Sun size={17} strokeWidth={1.75} aria-hidden="true" />
         ) : (
           <Moon
-            size={18}
+            size={17}
             strokeWidth={1.75}
             aria-hidden="true"
             className={theme === null ? "opacity-0" : undefined}
