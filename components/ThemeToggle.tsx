@@ -35,13 +35,43 @@ export function ThemeToggle() {
   const theme = useSyncExternalStore<Theme | null>(subscribe, getTheme, () => null);
   const next: Theme = theme === "dark" ? "light" : "dark";
 
-  function toggle() {
+  function applyTheme() {
     document.documentElement.dataset.theme = next;
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
       // stockage indisponible : le choix vaut pour cette visite
     }
+  }
+
+  /** Révélation circulaire : le nouveau thème grandit en cercle depuis le bouton (View Transitions). */
+  function toggle(event: React.MouseEvent<HTMLButtonElement>) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || reduceMotion) {
+      applyTheme();
+      return;
+    }
+
+    // Centre du bouton en pourcentage de l'écran : plus robuste qu'en pixels
+    // si la capture de la transition est mise à l'échelle.
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+    const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+    // 150 % du rayon de référence dépasse toujours le coin le plus éloigné.
+    const end = `circle(150% at ${x}% ${y}%)`;
+    const start = `circle(0% at ${x}% ${y}%)`;
+
+    const transition = document.startViewTransition(applyTheme);
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [start, end] },
+        {
+          duration: 700,
+          easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    });
   }
 
   return (

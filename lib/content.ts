@@ -8,7 +8,11 @@ export const profile = {
   timeZone: "Africa/Lome",
   email: "sessoujeandedieu@gmail.com",
   pitch:
-    "Backend, IA, déploiement — je construis de bout en bout, sur assez de stacks pour savoir ce qui marche vraiment.",
+    "Je transforme des idées en applications propres, livrées vite et prêtes à grandir.",
+  // CV sur Google Drive : téléchargement direct du PDF (fichier partagé publiquement).
+  // Aperçu : https://drive.google.com/file/d/1f_BlZEG-yheUAmi4xLB_oncQrtxhlPhx/view
+  cvUrl:
+    "https://drive.google.com/uc?export=download&id=1f_BlZEG-yheUAmi4xLB_oncQrtxhlPhx",
   playlistId: "1b0pmYBYbIxrJQStqG2c3X",
   playlistUrl: "https://open.spotify.com/playlist/1b0pmYBYbIxrJQStqG2c3X",
 };
@@ -47,7 +51,7 @@ export const projects: Project[] = [
   {
     name: "Kizo",
     description:
-      "Une plateforme que j’ai cofondée et construite pour découvrir des événements, recevoir des rappels personnalisés et se retrouver autour d’expériences partagées.",
+      "J’ai cofondé et construit Kizo, une plateforme pour découvrir des événements, recevoir des rappels pensés pour soi et retrouver d’autres gens autour des mêmes expériences.",
     stack: ["Next.js", "TypeScript", "Supabase", "MongoDB"],
     live: "https://kizoapp.com",
     image: "/projects/kizo.png",
@@ -56,7 +60,7 @@ export const projects: Project[] = [
   {
     name: "Personal Blog API",
     description:
-      "L’API REST qui fait tourner un blog : articles, catégories, authentification JWT et accès publics ou privés, avec une documentation Swagger.",
+      "L’API REST qui fait tourner un blog. Elle gère les articles, les catégories, l’authentification JWT et les accès publics ou privés, le tout documenté avec Swagger.",
     stack: ["Node.js", "Express", "MongoDB", "Redis"],
     year: "2024",
     live: "https://personal-blog-api-7cge.onrender.com/api-docs/",
@@ -66,7 +70,7 @@ export const projects: Project[] = [
   {
     name: "Password Generator",
     description:
-      "Génère des mots de passe selon tes critères, longueur, symboles ou chiffres, et en évalue la robustesse en temps réel.",
+      "Tu choisis la longueur, les symboles et les chiffres, il génère le mot de passe et te dit tout de suite s’il est solide.",
     stack: ["JavaScript", "SCSS", "HTML"],
     year: "2024",
     live: "https://johnofgod33.github.io/password-generator/",
@@ -76,7 +80,7 @@ export const projects: Project[] = [
   {
     name: "Admin Blog Panel",
     description:
-      "L’interface pour écrire, modifier et publier les articles du blog, avec authentification et brouillons. Elle s’appuie sur Personal Blog API.",
+      "L’interface d’administration du blog. On s’y connecte pour écrire, modifier et publier ses articles, brouillons compris. Elle tourne sur Personal Blog API.",
     stack: ["React", "React Router", "Axios"],
     year: "2024",
     code: "https://github.com/johnOfGod33/admin-blog-panel",
@@ -85,7 +89,7 @@ export const projects: Project[] = [
   {
     name: "Caching Proxy CLI",
     description:
-      "Un outil en ligne de commande qui lance un proxy de cache : il intercepte les requêtes HTTP et garde les réponses dans Redis pour éviter les appels inutiles au serveur d’origine.",
+      "Un outil en ligne de commande qui lance un proxy de cache. Il intercepte les requêtes HTTP et garde les réponses dans Redis, ce qui évite de rappeler le serveur d’origine pour rien.",
     stack: ["TypeScript", "Express", "Redis"],
     year: "2024",
     code: "https://github.com/johnOfGod33/Caching-Proxy-CLI",

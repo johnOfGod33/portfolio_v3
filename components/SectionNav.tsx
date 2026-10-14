@@ -37,7 +37,7 @@ export function SectionNav({ sections }: SectionNavProps) {
               <a
                 href={`#${id}`}
                 aria-current={isActive ? "true" : undefined}
-                className={`group flex min-h-10 items-center gap-4 text-sm font-medium transition-colors duration-200 ${
+                className={`group flex min-h-10 items-center short:min-h-8 gap-4 text-sm font-medium transition-colors duration-200 ${
                   isActive
                     ? "text-foreground"
                     : "text-faint hover:text-foreground"

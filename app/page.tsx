@@ -1,4 +1,10 @@
-import { ArrowRight, ArrowUpRight, Mail, PenLine } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Download,
+  Mail,
+  PenLine,
+} from "lucide-react";
 import Link from "next/link";
 import { Fragment } from "react";
 
@@ -79,7 +85,7 @@ function AnimatedName({ text }: { text: string }) {
 export default function Home() {
   return (
     <div className="mx-auto max-w-6xl px-6 md:px-12 lg:flex lg:justify-between lg:gap-16">
-      <header className="flex flex-col pt-14 sm:pt-20 lg:sticky lg:top-0 lg:h-dvh lg:w-[42%] lg:justify-between lg:overflow-y-auto lg:py-20 lg:[scrollbar-width:none]">
+      <header className="flex flex-col pt-14 sm:pt-20 lg:sticky lg:top-0 lg:h-dvh lg:w-[42%] lg:justify-between lg:overflow-y-auto lg:py-20 lg:[scrollbar-width:none] short:py-10">
         <div>
           <div className="settle" style={{ "--i": 0 } as React.CSSProperties}>
             <VinylPlayer
@@ -88,7 +94,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 short:mt-6">
             <AnimatedName text={profile.shortName} />
           </div>
           <div className="settle" style={{ "--i": 3 } as React.CSSProperties}>
@@ -98,10 +104,22 @@ export default function Home() {
             <p className="mt-3 max-w-sm text-pretty leading-7 text-muted-foreground">
               {profile.pitch}
             </p>
+            <a
+              href={profile.cvUrl}
+              className="group mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-foreground short:mt-4 px-5 text-sm font-medium text-background transition-[background-color,transform] duration-200 hover:bg-primary active:scale-[0.97]"
+            >
+              <Download
+                size={16}
+                strokeWidth={2}
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-out group-hover:translate-y-0.5"
+              />
+              Télécharger mon CV
+            </a>
           </div>
 
           <div
-            className="settle mt-12 hidden lg:block"
+            className="settle mt-12 hidden lg:block short:mt-6"
             style={{ "--i": 4 } as React.CSSProperties}
           >
             <SectionNav sections={sections} />
@@ -109,7 +127,7 @@ export default function Home() {
         </div>
 
         <div
-          className="settle mt-8 flex items-center justify-between gap-6 lg:mt-10"
+          className="settle mt-8 flex items-center justify-between gap-6 lg:mt-10 short:mt-6"
           style={{ "--i": 5 } as React.CSSProperties}
         >
           <ul className="-ml-3 flex items-center">
@@ -146,26 +164,27 @@ export default function Home() {
           </SectionHeading>
           <div className="reveal flex flex-col gap-4 text-pretty text-[17px] leading-[1.7]">
             <p>
-              Ingénieur logiciel basé au Togo, actuellement en{" "}
+              Je suis ingénieur logiciel au Togo, en ce moment en{" "}
               <span className="font-semibold text-foreground">
                 master IA &amp; Big Data à l’ESGIS
               </span>
-              . Mon parcours n’est pas linéaire : une{" "}
+              . Au départ, j’ai fait une{" "}
               <span className="font-semibold text-foreground">
                 licence en génie mécanique
               </span>
-              , puis une reconversion complète vers la tech — j’aimais trop
-              ça pour rester ailleurs.
+              . Puis je me suis entièrement reconverti dans la tech, parce
+              que j’aimais trop ça pour rester ailleurs.
             </p>
             <p>
-              Ce virage m’a appris à apprendre vite et à rester polyvalent.
-              Je travaille surtout côté backend (APIs, bases de données,
-              déploiement) et je fais le frontend quand le projet le demande.
+              Ce virage m’a appris à apprendre vite et à ne pas m’enfermer
+              dans une seule case. Aujourd’hui je travaille surtout côté
+              backend, sur les APIs, les bases de données et le déploiement,
+              et je passe au frontend quand le projet le demande.
             </p>
             <p>
-              En dehors du code : musique, échecs, jeux vidéo et beaucoup de
-              lecture. Le disque avec ma photo, c’est ma playlist de code :
-              clique dessus pour l’écouter ici même.
+              Hors du code, il y a la musique, les échecs, les jeux vidéo et
+              beaucoup de lecture. Le disque avec ma photo, c’est justement ce
+              que j’écoute en codant. Clique dessus, ça se lance ici.
             </p>
             <p className="mono pt-2 text-[13px] text-faint">
               {stack.join(" · ")}
