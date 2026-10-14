@@ -1,6 +1,4 @@
 // Contenu du portfolio.
-// Les projets et expériences marqués `placeholder: true` sont des exemples
-// (affichés avec la mention « exemple ») à remplacer avant la mise en ligne.
 
 export const profile = {
   name: "Jean de Dieu Sessou",
@@ -32,36 +30,44 @@ export type Project = {
   description: string;
   stack: string[];
   year: string;
-  href?: string;
+  href: string;
   /** Capture du site dans /public (ex. "/projects/mon-site.png"). Sans image, une couverture typographique est générée. */
   image?: string;
-  placeholder?: boolean;
 };
 
+// Projets publics (source : GitHub johnOfGod33). Le premier est mis en avant.
 export const projects: Project[] = [
   {
-    name: "Nom du projet",
-    description: "API de réservation avec paiement et notifications.",
-    stack: ["FastAPI", "PostgreSQL", "Docker"],
-    year: "2026",
-    href: "#",
-    placeholder: true,
+    name: "Personal Blog API",
+    description:
+      "API REST d’un blog : authentification JWT, articles publiés ou en brouillon, commentaires, cache Redis et documentation Swagger.",
+    stack: ["Node.js", "Express", "MongoDB", "Redis"],
+    year: "2024",
+    href: "https://github.com/johnOfGod33/Personal-Blog-API",
   },
   {
-    name: "Second projet",
-    description: "Site vitrine et back-office pour une PME locale.",
-    stack: ["Next.js", "Node.js", "MongoDB"],
-    year: "2025",
-    href: "#",
-    placeholder: true,
+    name: "Caching Proxy CLI",
+    description:
+      "Outil en ligne de commande qui lance un serveur proxy : il intercepte les requêtes et met les réponses en cache.",
+    stack: ["TypeScript", "Express", "Redis"],
+    year: "2024",
+    href: "https://github.com/johnOfGod33/Caching-Proxy-CLI",
   },
   {
-    name: "Troisième projet",
-    description: "Pipeline de traitement de données pour un modèle de ML.",
-    stack: ["Python", "FastAPI", "AWS"],
-    year: "2025",
-    href: "#",
-    placeholder: true,
+    name: "Admin Blog Panel",
+    description:
+      "Interface d’administration du blog pour rédiger et gérer les articles, branchée sur Personal Blog API.",
+    stack: ["React", "React Router", "Axios"],
+    year: "2024",
+    href: "https://github.com/johnOfGod33/admin-blog-panel",
+  },
+  {
+    name: "Password Generator",
+    description:
+      "Générateur de mots de passe selon les critères choisis, avec un indicateur de robustesse.",
+    stack: ["JavaScript", "SCSS", "HTML"],
+    year: "2024",
+    href: "https://johnofgod33.github.io/password-generator/",
   },
 ];
 
@@ -69,27 +75,43 @@ export type Experience = {
   period: string;
   title: string;
   company: string;
-  description: string;
+  /** Réalisations, une par ligne. */
+  highlights: string[];
   stack: string[];
-  placeholder?: boolean;
 };
 
+// Source : profil LinkedIn (Profile.pdf).
 export const experiences: Experience[] = [
   {
-    period: "2025 — aujourd’hui",
-    title: "Développeur backend",
-    company: "Entreprise",
-    description:
-      "Conception d’APIs, modélisation de bases de données et mise en production.",
-    stack: ["FastAPI", "PostgreSQL", "Docker"],
-    placeholder: true,
+    period: "août 2025 — aujourd’hui",
+    title: "Backend Engineer",
+    company: "EdoMatch",
+    highlights: [
+      "Conception et sécurisation de la base MongoDB de la plateforme (6 500+ offres actives, 50K+ profils, 3K+ entreprises).",
+      "Temps de chargement réduits de 40 % et protection contre les injections NoSQL.",
+      "85 % de couverture de tests et temps de réponse API réduit de 25 % grâce à une CI/CD sur AWS, debug des incidents en production.",
+    ],
+    stack: ["Python", "FastAPI", "MongoDB", "AWS"],
   },
   {
-    period: "2024 — 2025",
-    title: "Développeur fullstack",
-    company: "Entreprise",
-    description: "Applications web de bout en bout pour des clients variés.",
-    stack: ["Next.js", "Node.js", "MongoDB"],
-    placeholder: true,
+    period: "févr. 2025 — juil. 2025",
+    title: "Backend Engineer",
+    company: "EdoMatch",
+    highlights: [
+      "APIs REST en Python / FastAPI pour l’extraction et la structuration de CV, au cœur d’un moteur de recommandation basé sur les embeddings OpenAI.",
+      "Pipeline de traitement des candidatures avec n8n et Python (ingestion d’e-mails, extraction PDF/DOCX, dédoublonnage) : 3 000+ candidatures traitées.",
+      "Génération d’offres d’emploi par IA, adoptée par 3 000 entreprises de la plateforme.",
+    ],
+    stack: ["Python", "FastAPI", "OpenAI", "n8n"],
+  },
+  {
+    period: "juil. 2024 — sept. 2024",
+    title: "Développeur frontend",
+    company: "Projet Business Manager",
+    highlights: [
+      "Application web de gestion de stock en React : suivi des produits et reporting en temps réel via API.",
+      "Travail en binôme avec le développeur backend et le chef de projet pour garder un projet techniquement cohérent.",
+    ],
+    stack: ["React"],
   },
 ];

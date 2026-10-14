@@ -41,13 +41,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Placeholder() {
-  return (
-    <span className="mono ml-2 text-[11px] font-normal tracking-normal text-faint">
-      exemple
-    </span>
-  );
-}
 
 function AnimatedName({ text }: { text: string }) {
   return (
@@ -196,11 +189,18 @@ export default function Home() {
                 <div>
                   <h3 className="text-lg font-semibold tracking-normal text-foreground">
                     {xp.title} · {xp.company}
-                    {xp.placeholder && <Placeholder />}
                   </h3>
-                  <p className="mt-1.5 text-pretty text-[15px] leading-7">
-                    {xp.description}
-                  </p>
+                  <ul className="mt-2 flex flex-col gap-1.5 text-[15px] leading-7">
+                    {xp.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-3 text-pretty">
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.8rem] h-px w-2.5 shrink-0 bg-faint"
+                        />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
                   <p className="mono mt-3 text-[13px] text-faint">
                     {xp.stack.join(" · ")}
                   </p>
@@ -226,7 +226,12 @@ export default function Home() {
                   key={project.name}
                   className={`reveal ${featured ? "sm:col-span-2" : ""}`}
                 >
-                  <a href={project.href} className="group block">
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                  >
                     <ProjectCover
                       project={project}
                       index={i}
@@ -241,7 +246,6 @@ export default function Home() {
                           aria-hidden="true"
                           className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                         />
-                        {project.placeholder && <Placeholder />}
                       </h3>
                       <span className="mono text-[13px] text-faint">
                         {project.year}
