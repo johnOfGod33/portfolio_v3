@@ -22,7 +22,9 @@ export function ProjectCover({ project, index, featured }: ProjectCoverProps) {
           alt={`Aperçu de ${project.name}`}
           fill
           sizes={featured ? "(min-width: 1024px) 600px, 100vw" : "(min-width: 1024px) 300px, 50vw"}
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className={`object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] ${
+            project.imagePosition === "center" ? "object-center" : "object-left-top"
+          }`}
         />
       ) : (
         <div

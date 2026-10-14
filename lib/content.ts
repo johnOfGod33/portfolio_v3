@@ -29,45 +29,67 @@ export type Project = {
   name: string;
   description: string;
   stack: string[];
-  year: string;
-  href: string;
-  /** Capture du site dans /public (ex. "/projects/mon-site.png"). Sans image, une couverture typographique est générée. */
+  year?: string;
+  /** Site en ligne ou doc d’API. */
+  live?: string;
+  /** Dépôt GitHub. */
+  code?: string;
+  /** Capture locale (/public) ou hébergée sur GitHub. Sans image, une couverture typographique est générée. */
   image?: string;
+  /** Cadrage de l’image : "top" (calée en haut à gauche) pour une capture, "center" pour un logo. */
+  imagePosition?: "top" | "center";
 };
 
-// Projets publics (source : GitHub johnOfGod33). Le premier est mis en avant.
+const GH_RAW = "https://raw.githubusercontent.com/johnOfGod33";
+
+// Le premier projet est mis en avant ; les trois premiers sont sur l’accueil, tous sont sur /projets.
 export const projects: Project[] = [
+  {
+    name: "Kizo",
+    description:
+      "Une plateforme que j’ai cofondée et construite pour découvrir des événements, recevoir des rappels personnalisés et se retrouver autour d’expériences partagées.",
+    stack: ["Next.js", "TypeScript", "Supabase", "MongoDB"],
+    live: "https://kizoapp.com",
+    image: "/projects/kizo.png",
+    imagePosition: "center",
+  },
   {
     name: "Personal Blog API",
     description:
-      "API REST d’un blog : authentification JWT, articles publiés ou en brouillon, commentaires, cache Redis et documentation Swagger.",
+      "L’API REST qui fait tourner un blog : articles, catégories, authentification JWT et accès publics ou privés, avec une documentation Swagger.",
     stack: ["Node.js", "Express", "MongoDB", "Redis"],
     year: "2024",
-    href: "https://github.com/johnOfGod33/Personal-Blog-API",
-  },
-  {
-    name: "Caching Proxy CLI",
-    description:
-      "Outil en ligne de commande qui lance un serveur proxy : il intercepte les requêtes et met les réponses en cache.",
-    stack: ["TypeScript", "Express", "Redis"],
-    year: "2024",
-    href: "https://github.com/johnOfGod33/Caching-Proxy-CLI",
-  },
-  {
-    name: "Admin Blog Panel",
-    description:
-      "Interface d’administration du blog pour rédiger et gérer les articles, branchée sur Personal Blog API.",
-    stack: ["React", "React Router", "Axios"],
-    year: "2024",
-    href: "https://github.com/johnOfGod33/admin-blog-panel",
+    live: "https://personal-blog-api-7cge.onrender.com/api-docs/",
+    code: "https://github.com/johnOfGod33/Personal-Blog-API",
+    image: `${GH_RAW}/Personal-Blog-API/main/assets/Personal%20blog%20api.png`,
   },
   {
     name: "Password Generator",
     description:
-      "Générateur de mots de passe selon les critères choisis, avec un indicateur de robustesse.",
+      "Génère des mots de passe selon tes critères, longueur, symboles ou chiffres, et en évalue la robustesse en temps réel.",
     stack: ["JavaScript", "SCSS", "HTML"],
     year: "2024",
-    href: "https://johnofgod33.github.io/password-generator/",
+    live: "https://johnofgod33.github.io/password-generator/",
+    code: "https://github.com/johnOfGod33/password-generator",
+    image: `${GH_RAW}/password-generator/main/assets/passwordGenerator.PNG`,
+  },
+  {
+    name: "Admin Blog Panel",
+    description:
+      "L’interface pour écrire, modifier et publier les articles du blog, avec authentification et brouillons. Elle s’appuie sur Personal Blog API.",
+    stack: ["React", "React Router", "Axios"],
+    year: "2024",
+    code: "https://github.com/johnOfGod33/admin-blog-panel",
+    image: `${GH_RAW}/admin-blog-panel/main/src/assets/img/articles_homepage.png`,
+  },
+  {
+    name: "Caching Proxy CLI",
+    description:
+      "Un outil en ligne de commande qui lance un proxy de cache : il intercepte les requêtes HTTP et garde les réponses dans Redis pour éviter les appels inutiles au serveur d’origine.",
+    stack: ["TypeScript", "Express", "Redis"],
+    year: "2024",
+    code: "https://github.com/johnOfGod33/Caching-Proxy-CLI",
+    image: `${GH_RAW}/Caching-Proxy-CLI/main/asset/cli%20example.png`,
   },
 ];
 
@@ -75,43 +97,30 @@ export type Experience = {
   period: string;
   title: string;
   company: string;
-  /** Réalisations, une par ligne. */
-  highlights: string[];
+  /** Site de l’entreprise. */
+  url?: string;
+  /** Résumé de ce qui a été accompli, en une ou deux phrases. */
+  summary: string;
   stack: string[];
 };
 
 // Source : profil LinkedIn (Profile.pdf).
 export const experiences: Experience[] = [
   {
-    period: "août 2025 — aujourd’hui",
-    title: "Backend Engineer",
+    period: "févr. 2025 — aujourd’hui",
+    title: "Backend Engineer junior",
     company: "EdoMatch",
-    highlights: [
-      "Conception et sécurisation de la base MongoDB de la plateforme (6 500+ offres actives, 50K+ profils, 3K+ entreprises).",
-      "Temps de chargement réduits de 40 % et protection contre les injections NoSQL.",
-      "85 % de couverture de tests et temps de réponse API réduit de 25 % grâce à une CI/CD sur AWS, debug des incidents en production.",
-    ],
-    stack: ["Python", "FastAPI", "MongoDB", "AWS"],
-  },
-  {
-    period: "févr. 2025 — juil. 2025",
-    title: "Backend Engineer",
-    company: "EdoMatch",
-    highlights: [
-      "APIs REST en Python / FastAPI pour l’extraction et la structuration de CV, au cœur d’un moteur de recommandation basé sur les embeddings OpenAI.",
-      "Pipeline de traitement des candidatures avec n8n et Python (ingestion d’e-mails, extraction PDF/DOCX, dédoublonnage) : 3 000+ candidatures traitées.",
-      "Génération d’offres d’emploi par IA, adoptée par 3 000 entreprises de la plateforme.",
-    ],
-    stack: ["Python", "FastAPI", "OpenAI", "n8n"],
+    url: "https://www.edomatch.com",
+    summary:
+      "Je travaille sur le backend d’une plateforme de recrutement qui compte plus de 50 000 profils, 6 500 offres actives et 3 000 entreprises. J’y ai construit les fonctionnalités IA : les APIs FastAPI qui lisent et structurent les CV pour le moteur de recommandation par embeddings OpenAI, un pipeline n8n qui a traité plus de 3 000 candidatures, et une génération d’offres d’emploi adoptée par 3 000 entreprises. Côté données, je conçois et sécurise la base MongoDB : les chargements sont 40 % plus rapides et l’API répond 25 % plus vite grâce à une CI/CD sur AWS. Et quand un incident tombe en production, c’est moi qui le débogue.",
+    stack: ["Python", "FastAPI", "MongoDB", "OpenAI", "n8n", "AWS"],
   },
   {
     period: "juil. 2024 — sept. 2024",
     title: "Développeur frontend",
     company: "Projet Business Manager",
-    highlights: [
-      "Application web de gestion de stock en React : suivi des produits et reporting en temps réel via API.",
-      "Travail en binôme avec le développeur backend et le chef de projet pour garder un projet techniquement cohérent.",
-    ],
+    summary:
+      "Une application de gestion de stock en React, avec suivi des produits et reporting en temps réel via l’API. Je travaillais main dans la main avec le développeur backend et le chef de projet pour que l’ensemble reste cohérent.",
     stack: ["React"],
   },
 ];

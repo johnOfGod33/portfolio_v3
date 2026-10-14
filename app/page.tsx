@@ -1,14 +1,18 @@
-import { ArrowUpRight, Mail, PenLine } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, PenLine } from "lucide-react";
+import Link from "next/link";
 import { Fragment } from "react";
 
 import { ChessPuzzle } from "@/components/ChessPuzzle";
 import { CopyEmail } from "@/components/CopyEmail";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/brand-icons";
 import { LocalTime } from "@/components/LocalTime";
-import { ProjectCover } from "@/components/ProjectCover";
+import { ProjectCard } from "@/components/ProjectCard";
 import { SectionNav } from "@/components/SectionNav";
 import { VinylPlayer } from "@/components/VinylPlayer";
 import { experiences, profile, projects, socials, stack } from "@/lib/content";
+
+// Nombre de projets affichés sur l’accueil ; les autres sont sur /projets.
+const HOME_PROJECTS = 3;
 
 const sections = [
   { id: "a-propos", label: "À propos" },
@@ -188,19 +192,29 @@ export default function Home() {
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold tracking-normal text-foreground">
-                    {xp.title} · {xp.company}
-                  </h3>
-                  <ul className="mt-2 flex flex-col gap-1.5 text-[15px] leading-7">
-                    {xp.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-3 text-pretty">
-                        <span
+                    {xp.title} ·{" "}
+                    {xp.url ? (
+                      <a
+                        href={xp.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1 transition-colors duration-150 hover:text-primary"
+                      >
+                        {xp.company}
+                        <ArrowUpRight
+                          size={16}
+                          strokeWidth={2}
                           aria-hidden="true"
-                          className="mt-[0.8rem] h-px w-2.5 shrink-0 bg-faint"
+                          className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                         />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
+                      </a>
+                    ) : (
+                      xp.company
+                    )}
+                  </h3>
+                  <p className="mt-1.5 text-pretty text-[15px] leading-7">
+                    {xp.summary}
+                  </p>
                   <p className="mono mt-3 text-[13px] text-faint">
                     {xp.stack.join(" · ")}
                   </p>
@@ -219,46 +233,32 @@ export default function Home() {
             <span id="h-projets">Projets</span>
           </SectionHeading>
           <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2">
-            {projects.map((project, i) => {
-              const featured = i === 0;
-              return (
-                <li
-                  key={project.name}
-                  className={`reveal ${featured ? "sm:col-span-2" : ""}`}
-                >
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block"
-                  >
-                    <ProjectCover
-                      project={project}
-                      index={i}
-                      featured={featured}
-                    />
-                    <div className="mt-4 flex items-baseline justify-between gap-4">
-                      <h3 className="flex items-center gap-1 text-lg font-semibold tracking-normal text-foreground transition-colors duration-150 group-hover:text-primary">
-                        {project.name}
-                        <ArrowUpRight
-                          size={16}
-                          strokeWidth={2}
-                          aria-hidden="true"
-                          className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                        />
-                      </h3>
-                      <span className="mono text-[13px] text-faint">
-                        {project.year}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-pretty text-[15px] leading-7">
-                      {project.description}
-                    </p>
-                  </a>
-                </li>
-              );
-            })}
+            {projects.slice(0, HOME_PROJECTS).map((project, i) => (
+              <ProjectCard
+                key={project.name}
+                project={project}
+                index={i}
+                featured={i === 0}
+              />
+            ))}
           </ul>
+          {projects.length > HOME_PROJECTS && (
+            <Link
+              href="/projets"
+              className="group mt-10 inline-flex min-h-11 items-center gap-2 font-medium text-foreground transition-colors duration-150 hover:text-primary"
+            >
+              Voir tous les projets
+              <span className="mono text-[13px] font-normal text-faint">
+                {projects.length}
+              </span>
+              <ArrowRight
+                size={16}
+                strokeWidth={2}
+                aria-hidden="true"
+                className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+              />
+            </Link>
+          )}
         </section>
 
         <section
