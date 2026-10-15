@@ -42,6 +42,16 @@ export function ProjectCard({
         />
         <div className="mt-4 flex items-baseline justify-between gap-4">
           <h3 className="flex items-center gap-1 text-lg font-semibold tracking-normal text-foreground transition-colors duration-150 group-hover:text-primary">
+            {project.logo && (
+              <span
+                aria-hidden="true"
+                className="mr-1 size-[1.1em] shrink-0 bg-current"
+                style={{
+                  mask: `url(${project.logo}) center / contain no-repeat`,
+                  WebkitMask: `url(${project.logo}) center / contain no-repeat`,
+                }}
+              />
+            )}
             {project.name}
             <ArrowUpRight
               size={16}
@@ -50,8 +60,15 @@ export function ProjectCard({
               className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </h3>
-          {project.year && (
-            <span className="mono text-[13px] text-faint">{project.year}</span>
+          {project.status ? (
+            <span className="mono inline-flex shrink-0 items-center gap-1.5 text-[12px] text-foreground">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
+              {project.status[lang]}
+            </span>
+          ) : (
+            project.year && (
+              <span className="mono text-[13px] text-faint">{project.year}</span>
+            )
           )}
         </div>
         <p className="mt-1 text-pretty text-[15px] leading-7">

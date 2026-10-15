@@ -23,6 +23,8 @@ export function ProjectCover({ project, index, featured, alt }: ProjectCoverProp
       className={`relative overflow-hidden rounded-xl bg-surface ${
         featured ? "aspect-[16/9]" : "aspect-[4/3]"
       } ${hasImage ? "cover-reveal" : ""}`}
+      // Fond propre au projet, visible autour d'une image affichée en entier.
+      style={project.imageBg ? { backgroundColor: project.imageBg } : undefined}
     >
       {project.image && (
         <Image
@@ -30,9 +32,9 @@ export function ProjectCover({ project, index, featured, alt }: ProjectCoverProp
           alt={alt}
           fill
           sizes={featured ? "(min-width: 1024px) 600px, 100vw" : "(min-width: 1024px) 300px, 50vw"}
-          className={`cover-image object-cover ${
-            project.imagePosition === "center" ? "object-center" : "object-left-top"
-          }`}
+          className={`cover-image ${
+            project.imageFit === "contain" ? "object-contain py-4" : "object-cover"
+          } ${project.imagePosition === "center" ? "object-center" : "object-left-top"}`}
         />
       )}
       <div
